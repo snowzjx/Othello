@@ -38,13 +38,8 @@ bool OthelloLayer::init(GameMode gameMode) {
     
     this->setGameMode(gameMode);
     this->_othello->startOthello();
-    
+        
     // ------------- Test -------------
-    
-//    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
-//    this->othello->EndOthello();
-//    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-//    this->othello->StartOthello();
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
     auto closeItem = MenuItemImage::create("CloseNormal.png",
@@ -149,4 +144,17 @@ void OthelloLayer::undoComfirmCallBack(cocos2d::Object *pSender) {
             break;
         }
     }
+}
+
+void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
+    for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
+        if ((*itr)->respondToUndoComfirmAction(false)) {
+            break;
+        }
+    }
+}
+
+OthelloLayer::~OthelloLayer() {
+    this->_othello->endOthello();
+    Singleton<Othello>::destroyInstance();
 }

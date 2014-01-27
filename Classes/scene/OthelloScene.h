@@ -27,6 +27,7 @@ public:
     static OthelloLayer* create(GameMode gameMode);
     virtual bool init(GameMode gameMode);
     void setGameMode(GameMode gameMode);
+    ~OthelloLayer();
 
 private:
     std::shared_ptr<Engine> createPlayerEngine();
@@ -37,7 +38,7 @@ private:
     void undoCancelCallBack(Object *pSender);
     
 private:
-    std::shared_ptr<Othello> _othello = std::shared_ptr<Othello>(Singleton<Othello>::instance());
+    std::shared_ptr<Othello> _othello = std::shared_ptr<Othello>(Singleton<Othello>::getInstance());
     std::shared_ptr<Matrix<short>> _storedBoardState = nullptr;
     std::set<std::shared_ptr<ActionResponder>> _actionResponderSet;
     cocos2d::SpriteBatchNode _piecesNode;

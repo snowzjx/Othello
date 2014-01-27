@@ -46,7 +46,7 @@ public:
         if (this->_row != matrixData._row || this->_column != matrixData._column) {
             return false;
         }
-        for (int i = 0; i < row * column; i++) {
+        for (int i = 0; i < _row * _column; i++) {
             if (this->_data[i] != matrixData._data[i]) {
                 return false;
             }

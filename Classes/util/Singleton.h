@@ -13,7 +13,7 @@ template <typename T>
 class Singleton {
 public:
     template<typename... Args>
-    static T* instance(Args... args) {
+    static T* getInstance(Args... args) {
         if(_m_pInstance==nullptr)
             _m_pInstance = new T(args...);
         
