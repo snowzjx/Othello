@@ -8,13 +8,10 @@
 
 #include "PlayerEngine.h"
 
+#include <thread>
 #include <cstdlib>
 #include "../game/Othello.h"
 #include "../util/PlayerUtil.h"
-
-PlayerEngine::PlayerEngine() {
-    this->_isActionValueSet = false;
-}
 
 std::function<bool()> PlayerEngine::getNextAction() {
     this->_status = ActionResponderStatus::WAITING_FOR_CONTROL_ACTION;
@@ -96,4 +93,15 @@ bool PlayerEngine::respondToUndoComfirmAction(bool value) {
     this->_isActionValueSet = true;
     this->_condVar.notify_all();
     return true;
+}
+
+void PlayerEngine::start() {
+	this->_isActionValueSet = false;
+}
+
+void PlayerEngine::stop() {
+	this->_isActionValueSet = true;
+	this->_action = []()->bool {return false;};
+	this->_isComfirmUndo = false;
+	this->_condVar.notify_all();
 }

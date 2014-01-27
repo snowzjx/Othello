@@ -21,10 +21,12 @@ protected:
     Player _player;
     std::weak_ptr<Othello> _othello;
 public:
-    void SetPlayer(Player player);
-    void SetOthello(std::shared_ptr<Othello> othello);
+    void setPlayer(Player player);
+    void setOthello(std::shared_ptr<Othello> othello);
     virtual std::function<bool()> getNextAction() = 0;
     virtual bool getComfirmUndoValue() = 0;
+	virtual void start() = 0;
+	virtual void stop() = 0;
 };
 
 #endif

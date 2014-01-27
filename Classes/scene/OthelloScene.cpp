@@ -153,8 +153,3 @@ void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
         }
     }
 }
-
-OthelloLayer::~OthelloLayer() {
-    this->_othello->endOthello();
-    Singleton<Othello>::destroyInstance();
-}

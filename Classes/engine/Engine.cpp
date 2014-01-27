@@ -10,10 +10,10 @@
 
 
 
-void Engine::SetPlayer(Player player) {
+void Engine::setPlayer(Player player) {
     this->_player = player;
 }
 
-void Engine::SetOthello(std::shared_ptr<Othello> othello) {
+void Engine::setOthello(std::shared_ptr<Othello> othello) {
     this->_othello = othello;
 }

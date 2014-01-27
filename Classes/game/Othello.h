@@ -9,6 +9,7 @@
 #ifndef _OTHELLO_H_
 #define _OTHELLO_H_
 
+#include <thread>
 #include <vector>
 #include <stack>
 #include <memory>
@@ -22,10 +23,11 @@ class Othello final: public std::enable_shared_from_this<Othello> {
 private:
 	std::weak_ptr<OthelloDelegate> _delegate;
     std::atomic_bool _isGameShouldRun;
-    std::shared_ptr<Board> _board = std::shared_ptr<Board>(new Board());
+    std::shared_ptr<Board> _board;
     std::map<Player, std::shared_ptr<Engine>> _playerEngineMap;
     std::map<Player, std::vector<std::pair<unsigned short, unsigned short>>> _playAvailPosMap;
     std::shared_ptr<std::stack<Player>> _playStack;
+	std::thread _othelloThread;
     
 private:
     void updateAvailPos(Player player);
@@ -43,6 +45,7 @@ public:
     const std::shared_ptr<std::stack<Player>> getPlayerStack();
     void startOthello();
     void endOthello();
+	~Othello();
 };
 
 #endif

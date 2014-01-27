@@ -9,11 +9,6 @@
 #include "Othello.h"
 
 #include <thread>
-#if COCOS2D_DEBUG == 1
-#include <iostream>
-#include <iomanip>
-#endif
-
 #include "../util/PlayerUtil.h"
 
 Othello::Othello() {
@@ -26,8 +21,8 @@ void Othello::setDelegate(std::shared_ptr<OthelloDelegate> delegate) {
 }
 
 void Othello::setEngine(Player player, std::shared_ptr<Engine> enginePtr) {
-    enginePtr->SetPlayer(player);
-    enginePtr->SetOthello(this->shared_from_this());
+    enginePtr->setPlayer(player);
+    enginePtr->setOthello(this->shared_from_this());
     this->_playerEngineMap[player] = enginePtr;
 }
 
@@ -52,15 +47,19 @@ const std::shared_ptr<std::stack<Player>> Othello::getPlayerStack() {
 }
 
 void Othello::startOthello() {
+	this->_board = std::shared_ptr<Board>(new Board);
     this->_playStack->push(Player::BlackPlayer);
+	this->_playerEngineMap[Player::BlackPlayer]->start();
+	this->_playerEngineMap[Player::WhitePlayer]->start();
     this->_isGameShouldRun = true;
-    std::thread othelloThread(&Othello::othelloThreadStart, this);
-    othelloThread.detach();
+    this->_othelloThread = std::thread(&Othello::othelloThreadStart, this);
 }
 
 void Othello::endOthello() {
     this->_isGameShouldRun = false;
-    this->_board = std::shared_ptr<Board>(new Board);
+	this->_playerEngineMap[Player::BlackPlayer]->stop();
+	this->_playerEngineMap[Player::WhitePlayer]->stop();
+	this->_othelloThread.join();
 }
 
 void Othello::updateAvailPos(Player player) {
@@ -125,6 +124,10 @@ void Othello::othelloThreadStart() {
 	if (this->_delegate.lock()) {
 		this->_delegate.lock()->othelloGameDidFinish();
 	}
+}
+
+Othello::~Othello() {
+	this->endOthello();
 }
 
 

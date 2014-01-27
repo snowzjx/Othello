@@ -12,10 +12,6 @@
 #include <time.h>
 #include "../game/Othello.h"
 
-AIEngine::AIEngine() {
-    srand(time(0));
-}
-
 std::function<bool()> AIEngine::getNextAction() {
     return [&]() -> bool {
         auto availPos = this->_othello.lock()->getPlayerAvailPos(this->_player);
@@ -30,4 +26,12 @@ std::function<bool()> AIEngine::getNextAction() {
 
 bool AIEngine::getComfirmUndoValue() {
     return true;
+}
+
+void AIEngine::start() {
+	srand(time(0));
+}
+
+void AIEngine::stop() {
+	return;
 }

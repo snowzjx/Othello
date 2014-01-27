@@ -27,7 +27,6 @@ public:
     static OthelloLayer* create(GameMode gameMode);
     virtual bool init(GameMode gameMode);
     void setGameMode(GameMode gameMode);
-    ~OthelloLayer();
 
 private:
     std::shared_ptr<Engine> createPlayerEngine();

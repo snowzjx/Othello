@@ -13,9 +13,10 @@
 
 class AIEngine: public Engine {
 public:
-    AIEngine();    
     virtual std::function<bool()> getNextAction() override;
     virtual bool getComfirmUndoValue() override;
+	virtual void start() override;
+	virtual void stop() override;
 };
 
 #endif
