@@ -56,10 +56,12 @@ void Othello::startOthello() {
 }
 
 void Othello::endOthello() {
-    this->_isGameShouldRun = false;
+	this->_isGameShouldRun = false;
 	this->_playerEngineMap[Player::BlackPlayer]->stop();
 	this->_playerEngineMap[Player::WhitePlayer]->stop();
-	this->_othelloThread.join();
+	if (this->_othelloThread.joinable()) {
+		this->_othelloThread.join();
+	}
 }
 
 void Othello::updateAvailPos(Player player) {
