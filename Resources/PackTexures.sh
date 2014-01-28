@@ -11,38 +11,38 @@ if [ "${ACTION}" = "clean" ]
 
 then
 echo "cleaning..."
-rm ./1280p/sprite*
-rm ./640p/sprite*
-rm ./320p/sprite*
+rm ./1280p/*
+rm ./640p/*
+rm ./320p/*
 
 else
 echo "building..."
 
 ${TP} --smart-update \
 --format cocos2d \
---data 1280p/sprite.plist \
---sheet 1280p/sprite.pvr.ccz \
+--data 1280p/othelloscene.plist \
+--sheet 1280p/othelloscene.pvr.ccz \
 --dither-fs \
 --opt RGB565 \
-../OthelloArt/sprite/*.png
+../OthelloArt/OthelloScene/*.png
 
 ${TP} --smart-update \
 --format cocos2d \
---data 640p/sprite.plist \
---sheet 640p/sprite.pvr.ccz \
+--data 640p/othelloscene.plist \
+--sheet 640p/othelloscene.pvr.ccz \
 --dither-fs \
 --scale 0.5 \
 --opt RGB565 \
-../OthelloArt/sprite/*.png
+../OthelloArt/OthelloScene/*.png
 
 ${TP} --smart-update \
 --format cocos2d \
---data 320p/sprite.plist \
---sheet 320p/sprite.pvr.ccz \
+--data 320p/othelloscene.plist \
+--sheet 320p/othelloscene.pvr.ccz \
 --dither-fs \
 --scale 0.25 \
 --opt RGB565 \
-../OthelloArt/sprite/*.png
+../OthelloArt/OthelloScene/*.png
 
 fi
 exit 0

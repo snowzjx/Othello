@@ -15,6 +15,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto eglView = EGLView::getInstance();
+    
+    Size screenSize = eglView->getFrameSize();
+    
 
     director->setOpenGLView(eglView);
 	
