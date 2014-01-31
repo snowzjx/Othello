@@ -16,8 +16,8 @@ Othello::Othello() {
     this->_playStack = std::shared_ptr<std::stack<Player>>(new std::stack<Player>());
 }
 
-void Othello::setDelegate(std::shared_ptr<OthelloDelegate> delegate) {
-	this->_delegate = delegate;
+void Othello::setDelegate(OthelloDelegate *delegate) {
+    this->_delegate = delegate;
 }
 
 void Othello::setEngine(Player player, std::shared_ptr<Engine> enginePtr) {
@@ -123,9 +123,9 @@ void Othello::othelloThreadStart() {
             }
         }
     }
-	if (this->_delegate.lock()) {
-		this->_delegate.lock()->othelloGameDidFinish();
-	}
+    if (this->_delegate != nullptr) {
+        this->_delegate->othelloGameDidFinish();
+    }
 }
 
 Othello::~Othello() {

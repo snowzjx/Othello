@@ -21,7 +21,7 @@
 
 class Othello final: public std::enable_shared_from_this<Othello> {
 private:
-	std::weak_ptr<OthelloDelegate> _delegate;
+    OthelloDelegate* _delegate = nullptr; //To support cocos2dx layer, raw pointer has to be used instead of smart weak pointer.
     std::atomic_bool _isGameShouldRun;
     std::shared_ptr<Board> _board;
     std::map<Player, std::shared_ptr<Engine>> _playerEngineMap;
@@ -36,7 +36,7 @@ private:
 
 public:
     Othello();
-	void setDelegate(std::shared_ptr<OthelloDelegate> delegate);
+    void setDelegate(OthelloDelegate* delegate);
     void setEngine(Player player, std::shared_ptr<Engine> enginePtr);
     const Player getCurrentPlayer();
     const std::shared_ptr<Engine> getEngine(Player player);

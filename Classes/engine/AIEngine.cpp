@@ -13,7 +13,7 @@
 #include "../game/Othello.h"
 
 std::function<bool()> AIEngine::getNextAction() {
-//  std::this_thread::sleep_for(std::chrono::seconds(3));
+//  std::this_thread::sleep_for(std::chrono::seconds(1));
     return [&]() -> bool {
         auto availPos = this->_othello.lock()->getPlayerAvailPos(this->_player);
         int size = availPos.size();

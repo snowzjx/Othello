@@ -12,7 +12,8 @@
 enum GameMode {
     aiVsHuman,
     humanVsAi,
-    humanVsHuman
+    humanVsHuman,
+    aiVsAi
 };
 
 #endif

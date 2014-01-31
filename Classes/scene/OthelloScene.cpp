@@ -40,8 +40,9 @@ bool OthelloLayer::init(GameMode gameMode) {
         return false;
     }
     
+    this->_othello->setDelegate(this);
+    
     Size winSize = Director::getInstance()->getWinSize();
-    log("Win Size, Width: %f, Height: %f.", winSize.width, winSize.height);
     
     this->_piecesBatchNode = SpriteBatchNode::create("othelloscene.pvr.ccz");
     this->addChild(this->_piecesBatchNode, 5);
@@ -75,11 +76,19 @@ void OthelloLayer::setGameMode(GameMode gameMode) {
             bEngine = std::shared_ptr<Engine>(new AIEngine);
             wEngine = this->createPlayerEngine();
             break;
+        case GameMode::aiVsAi:
+            bEngine = std::shared_ptr<Engine>(new AIEngine);
+            wEngine = std::shared_ptr<Engine>(new AIEngine);
+            break;
         default:
             break;
     }
     this->_othello->setEngine(Player::BlackPlayer, bEngine);
     this->_othello->setEngine(Player::WhitePlayer, wEngine);
+}
+
+void OthelloLayer::othelloGameDidFinish() {
+    log("Game Did Finish!");
 }
 
 std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
@@ -113,6 +122,7 @@ void OthelloLayer::update(float delta) {
 	auto currentBoardState = this->_othello->getBoard()->getBoardState();
 	if (this->_storedBoardState == nullptr || this->_storedBoardState != currentBoardState) {
 		log("Othello board is updating ...");
+        log("Waiting for player: %d", this->_othello->getCurrentPlayer());
         for (short i = 0; i < BOARD_WIDTH; i ++) {
             for (short j = 0; j < BOARD_HEIGHT; j++) {
                 auto deltaValue = (*currentBoardState)[i][j] - (this->_storedBoardState == nullptr ? 0 : (*this->_storedBoardState)[i][j]);

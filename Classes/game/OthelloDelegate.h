@@ -11,6 +11,6 @@
 
 class OthelloDelegate {
 public:
-	virtual void othelloGameDidFinish();
+	virtual void othelloGameDidFinish() = 0;
 };
 #endif
