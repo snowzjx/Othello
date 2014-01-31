@@ -96,11 +96,12 @@ void OthelloLayer::onEnter() {
     };
     listener->onTouchEnded = [&](Touch* touch, Event* event) {
         auto location = touch->getLocation();
-        float touchX = location.x;
-        float touchY = location.y;
-        log("Touch event, x: %f, y: %f.", touchX, touchY);
+        std::pair<short, short> boardPos = PointUtil::convertToBoardFromPoint(location);
+        short x = std::get<0>(boardPos);
+        short y = std::get<1>(boardPos);
+        log("Touch event, x: %d, y: %d.", x, y);
         for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
-            if ((*itr)->respondToMoveAction(touchX, touchY)) {
+            if ((*itr)->respondToMoveAction(x, y)) {
                 break;
             }
         }
@@ -128,18 +129,7 @@ void OthelloLayer::update(float delta) {
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->getStatus() == ActionResponderStatus::NEED_TO_ASK_FOR_USER_COMFIRM) {
             (*itr)->setStatus(ActionResponderStatus::WAITING_FOR_USER_COMFIRM_ACTION);
-            //TEST CODE BEGIN
-            Size visibleSize = Director::getInstance()->getVisibleSize();
-            Point origin = Director::getInstance()->getVisibleOrigin();
-            auto closeItem = MenuItemImage::create("CloseNormal.png",
-                                                   "CloseSelected.png",
-                                                   CC_CALLBACK_1(OthelloLayer::undoComfirmCallBack, this));
-            closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                         origin.y + 100 + closeItem->getContentSize().height/2));
-            auto menu = Menu::create(closeItem, NULL);
-            menu->setPosition(Point::ZERO);
-            this->addChild(menu, 1);
-            //TEST CODE END
+            //TODO: add pop over layer
         }
     }
 }

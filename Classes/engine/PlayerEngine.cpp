@@ -39,14 +39,8 @@ bool PlayerEngine::respondToMoveAction(unsigned short posX, unsigned short posY)
     if (!(this->_status == ActionResponderStatus::WAITING_FOR_CONTROL_ACTION)) {
         return false;
     }
-    this->_action = [&]() -> bool {
-        auto availPos = this->_othello.lock()->getPlayerAvailPos(this->_player);
-        int size = availPos.size();
-        short index = rand() % size;
-        auto pos = availPos[index];
-        unsigned short _posX = std::get<0>(pos);
-        unsigned short _posY = std::get<1>(pos);
-        return this->_othello.lock()->getBoard()->move(this->_player, _posX, _posY);
+    this->_action = [this, posX, posY]() -> bool {
+        return this->_othello.lock()->getBoard()->move(this->_player, posX, posY);
     };
     this->_isActionValueSet = true;
     this->_condVar.notify_all();
@@ -57,7 +51,7 @@ bool PlayerEngine::respondToUndoAction() {
     if (!(this->_status == ActionResponderStatus::WAITING_FOR_CONTROL_ACTION)) {
         return false;
     }
-    this->_action = [&]() -> bool {
+    this->_action = [this]() -> bool {
         auto playStack = this->_othello.lock()->getPlayerStack();
         if (playStack->size() > 2) {
             playStack->pop();

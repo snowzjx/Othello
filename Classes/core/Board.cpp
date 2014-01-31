@@ -38,7 +38,7 @@ bool Board::popOneBoardState() {
 
 bool Board::move(Player player, unsigned short x, unsigned short y) {
     std::shared_ptr<Matrix<short>> boardState = this->_boardStateStack.top()->clone();
-    if (x < 0 || y < 0 || x > BOARD_WIDTH || y > BOARD_HEIGHT) {
+    if (x < 0 || y < 0 || x > BOARD_WIDTH || y > BOARD_HEIGHT || (*boardState)[x][y] != NO_PLAYER) {
         return false;
     }
     std::vector<std::pair<short, short>> searchDirections;

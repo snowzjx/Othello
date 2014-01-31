@@ -53,7 +53,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = OthelloLayer::createScene(GameMode::humanVsHuman);
+    auto scene = OthelloLayer::createScene(GameMode::humanVsAi);
     
     // run
     director->runWithScene(scene);
