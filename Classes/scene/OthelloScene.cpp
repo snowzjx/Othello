@@ -7,8 +7,12 @@
 //
 
 #include "OthelloScene.h"
+#include "../AppDelegate.h"
 #include "../engine/PlayerEngine.h"
 #include "../engine/AIEngine.h"
+#include "../util/GraphicConfig.h"
+#include "../util/PointUtil.h"
+#include "../util/AnimationUtil.h"
 
 USING_NS_CC;
 
@@ -32,27 +36,25 @@ OthelloLayer* OthelloLayer::create(GameMode gameMode) {
 }
 
 bool OthelloLayer::init(GameMode gameMode) {
-    if (!Layer::init()) {
+    if (!LayerColor::initWithColor(BACKGROUND_COLOR)) {
         return false;
     }
     
+    Size winSize = Director::getInstance()->getWinSize();
+    log("Win Size, Width: %f, Height: %f.", winSize.width, winSize.height);
+    
+    this->_piecesBatchNode = SpriteBatchNode::create("othelloscene.pvr.ccz");
+    this->addChild(this->_piecesBatchNode, 5);
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("othelloscene.plist");
+    
+    Sprite *board = Sprite::createWithSpriteFrameName("Board.png");
+    board->setPosition(Point(winSize.width / 2, winSize.height / 2));
+    this->_piecesBatchNode->addChild(board, boardZOrder);
+    
     this->setGameMode(gameMode);
     this->_othello->startOthello();
-        
-    // ------------- Test -------------
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
-    auto closeItem = MenuItemImage::create("CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(OthelloLayer::undoCallBack, this));
     
-	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                 origin.y + closeItem->getContentSize().height/2));
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Point::ZERO);
-    this->addChild(menu, 1);
-
-    // --------------------------------
     this->scheduleUpdate();
     return true;
 }
@@ -96,6 +98,7 @@ void OthelloLayer::onEnter() {
         auto location = touch->getLocation();
         float touchX = location.x;
         float touchY = location.y;
+        log("Touch event, x: %f, y: %f.", touchX, touchY);
         for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
             if ((*itr)->respondToMoveAction(touchX, touchY)) {
                 break;
@@ -109,7 +112,18 @@ void OthelloLayer::update(float delta) {
 	auto currentBoardState = this->_othello->getBoard()->getBoardState();
 	if (this->_storedBoardState == nullptr || this->_storedBoardState != currentBoardState) {
 		log("Othello board is updating ...");
-		this->_storedBoardState = currentBoardState;
+        for (short i = 0; i < BOARD_WIDTH; i ++) {
+            for (short j = 0; j < BOARD_HEIGHT; j++) {
+                auto deltaValue = (*currentBoardState)[i][j] - (this->_storedBoardState == nullptr ? 0 : (*this->_storedBoardState)[i][j]);
+                auto newStatus = (*currentBoardState)[i][j] == 1 ? PieceSpriteStatus::BlackPiece : PieceSpriteStatus::WhitePiece;
+                if (abs(deltaValue) == 1) {
+                    this->createPieceAt(i, j, newStatus);
+                } else if (abs(deltaValue) == 2) {
+                    this->changePieceStatusAt(i, j, newStatus);
+                }
+            }
+        }
+        this->_storedBoardState = currentBoardState;
 	}
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->getStatus() == ActionResponderStatus::NEED_TO_ASK_FOR_USER_COMFIRM) {
@@ -152,4 +166,16 @@ void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
             break;
         }
     }
+}
+
+void OthelloLayer::createPieceAt(short i, short j, PieceSpriteStatus status ) {
+    PieceSprite *pieceSprite = PieceSprite::createWithPieceSpriteStatus(status);
+    pieceSprite->setScale(0);
+    pieceSprite->setPosition(PointUtil::convertToPointFromBoard(i, j));
+    this->_pieceSpriteVector[i * BOARD_WIDTH + j] = pieceSprite;
+    this->_piecesBatchNode->addChild(pieceSprite, pieceZOrder);
+    pieceSprite->runAction(ScaleTo::create(0.2, 1));
+}
+void OthelloLayer::changePieceStatusAt(short i, short j, PieceSpriteStatus status) {
+    this->_pieceSpriteVector[i * BOARD_WIDTH + j]->setStatus(status);
 }
