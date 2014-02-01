@@ -20,7 +20,7 @@ public:
     virtual void onEnter() override;
     virtual void onExit() override;
     void setBackgroundImage(const std::string& backgroundImage);
-    void setTitle(const std::string& title);
+    void setTitle(cocos2d::Label* titleLabel);
     void setContext(const std::string& context);
     void addButton(const std::string& normalImage, const std::string& selectedImage, const std::string& title, std::function<bool(cocos2d::Object* pSender)>);
 };

@@ -177,6 +177,10 @@ void OthelloLayer::popupUndoLayer() {
     PopupLayer *popupLayer = PopupLayer::create();
     popupLayer->setBackgroundImage("PopupBG.png");
     popupLayer->setPosition(Point(winSize.width / 2, winSize.height / 2));
+    //TODO: Font path
+    auto titleLabel = Label::createWithTTF("Take Back", "", 20);
+    titleLabel->setColor(FOREGROUND_COLOR);
+    
     this->addChild(popupLayer, popupZOrder);
 }
 

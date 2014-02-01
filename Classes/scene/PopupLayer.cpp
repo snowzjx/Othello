@@ -21,10 +21,11 @@ void PopupLayer::onEnter() {
     log("PopupLayer onEnter...");
     Layer::onEnter();
     auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
     listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
         return true;
     };
-    this->_eventDispatcher->addEventListenerWithFixedPriority(listener, -128);
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 void PopupLayer::onExit() {
@@ -36,8 +37,8 @@ void PopupLayer::setBackgroundImage(const std::string &backgroundImage) {
     this->addChild(backgroundSprite, 0);
 }
 
-void PopupLayer::setTitle(const std::string &title) {
-    
+void PopupLayer::setTitle(cocos2d::Label* titleLabel) {
+    this->addChild(titleLabel);
 }
 
 void PopupLayer::setContext(const std::string &context) {

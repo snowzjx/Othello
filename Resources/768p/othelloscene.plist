@@ -20,7 +20,7 @@
             <key>CancelButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{28,982},{88,22}}</string>
+                <string>{{40,988},{88,22}}</string>
                 <key>offset</key>
                 <string>{99,-102}</string>
                 <key>rotated</key>
@@ -33,11 +33,11 @@
             <key>OkButton.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,982},{36,24}}</string>
+                <string>{{2,988},{36,24}}</string>
                 <key>offset</key>
                 <string>{-104,-102}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{358,410},{36,24}}</string>
                 <key>sourceSize</key>
@@ -46,7 +46,7 @@
             <key>Piece_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,648},{66,66}}</string>
+                <string>{{354,648},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>Piece_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{348,580},{66,66}}</string>
+                <string>{{354,580},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>Piece_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,920},{66,66}}</string>
+                <string>{{286,920},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>Piece_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,852},{66,66}}</string>
+                <string>{{286,852},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>Piece_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,784},{66,66}}</string>
+                <string>{{286,784},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>Piece_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,716},{66,66}}</string>
+                <string>{{286,716},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>Piece_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,648},{66,66}}</string>
+                <string>{{286,648},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>Piece_7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{280,580},{66,66}}</string>
+                <string>{{286,580},{66,66}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,13 +150,13 @@
             <key>PopupBG.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,580},{400,276}}</string>
+                <string>{{2,580},{406,282}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{1,-1}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{280,182},{400,276}}</string>
+                <string>{{278,180},{406,282}}</string>
                 <key>sourceSize</key>
                 <string>{960,640}</string>
             </dict>
@@ -170,7 +170,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d7a89aa1cad6e03e244e946ead45fc57:bdebdfbdef3bf2c06e750345b98e514c:ed0f13f63c08ca5cd049e14c3a95b074$</string>
+            <string>$TexturePacker:SmartUpdate:71bb9337c6f57cbd7ad9c61fc8e85c6c:945107ca00104bca657a18a31465f6e3:ed0f13f63c08ca5cd049e14c3a95b074$</string>
             <key>textureFileName</key>
             <string>othelloscene.pvr.ccz</string>
         </dict>

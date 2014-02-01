@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 
 static const cocos2d::Color4B BACKGROUND_COLOR = cocos2d::Color4B(25, 110, 245, 255);
+static const cocos2d::Color3B FOREGROUND_COLOR = cocos2d::Color3B(25, 110, 245);
 static const int boardZOrder = 0;
 static const float boardStartX = 120.0;
 static const float boardStartY = 41.0;
