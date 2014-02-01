@@ -32,7 +32,7 @@ void PopupLayer::onExit() {
 }
 
 void PopupLayer::setBackgroundImage(const std::string &backgroundImage) {
-    Sprite *backgroundSprite = Sprite::create(backgroundImage);
+    Sprite *backgroundSprite = Sprite::createWithSpriteFrameName(backgroundImage);
     this->addChild(backgroundSprite, 0);
 }
 

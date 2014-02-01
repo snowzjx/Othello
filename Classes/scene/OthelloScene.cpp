@@ -10,9 +10,10 @@
 #include "../AppDelegate.h"
 #include "../engine/PlayerEngine.h"
 #include "../engine/AIEngine.h"
-#include "../util/GraphicConfig.h"
+#include "../include/GraphicConfig.h"
 #include "../util/PointUtil.h"
 #include "../util/AnimationUtil.h"
+#include "PopupLayer.h"
 
 USING_NS_CC;
 
@@ -55,6 +56,9 @@ bool OthelloLayer::init(GameMode gameMode) {
     
     this->setGameMode(gameMode);
     this->_othello->startOthello();
+    
+    //TODO: Test code here
+    this->popupUndoLayer();
     
     this->scheduleUpdate();
     return true;
@@ -166,6 +170,14 @@ void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
             break;
         }
     }
+}
+
+void OthelloLayer::popupUndoLayer() {
+    Size winSize = Director::getInstance()->getWinSize();
+    PopupLayer *popupLayer = PopupLayer::create();
+    popupLayer->setBackgroundImage("PopupBG.png");
+    popupLayer->setPosition(Point(winSize.width / 2, winSize.height / 2));
+    this->addChild(popupLayer, popupZOrder);
 }
 
 void OthelloLayer::createPieceAt(short i, short j, PieceSpriteStatus status ) {

@@ -40,6 +40,7 @@ private:
     void undoCallBack(Object* pSender);
     void undoComfirmCallBack(Object *pSender);
     void undoCancelCallBack(Object *pSender);
+    void popupUndoLayer();
     void createPieceAt(short i, short j, PieceSpriteStatus status );
     void changePieceStatusAt(short i, short j, PieceSpriteStatus status);
     

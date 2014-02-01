@@ -18,4 +18,5 @@ static const float boardStartY = 41.0;
 static const float boardDeltaMain = 240.0 * 135.0/ 1150.0;
 static const float boardDeltaGap = 240.0 * 10.0 / 1150.0;
 static const int pieceZOrder = 5;
+static const int popupZOrder = 15;
 #endif

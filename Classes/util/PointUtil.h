@@ -11,7 +11,7 @@
 
 #include <set>
 #include "cocos2d.h"
-#include "GraphicConfig.h"
+#include "../include/GraphicConfig.h"
 
 class PointUtil {
 public:
