@@ -13,6 +13,7 @@ static const Resource mediumResource = {Size(1024, 768), "768p"};
 static const Resource largeResource = {Size(2048, 1536), "1536p"};
 static const Size designResolutionSize = Size(480, 320);
 static const std::string animationSearchPath = "animation";
+static const std::string fontSearchPath = "fonts";
 
 AppDelegate::AppDelegate() {
 
@@ -44,6 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setContentScaleFactor(smallResource.size.height / designResolutionSize.height);
     }
 	searchPath.push_back(animationSearchPath);
+    searchPath.push_back(fontSearchPath);
     FileUtils::getInstance()->setSearchPaths(searchPath);
     
     // turn on display FPS

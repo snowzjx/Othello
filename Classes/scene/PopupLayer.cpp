@@ -14,6 +14,9 @@ bool PopupLayer::init() {
     if (!Layer::init()) {
         return false;
     }
+    this->_memu = Menu::create();
+    this->_memu->setPosition(Point(0, -42));
+    this->addChild(this->_memu, 1);
     return true;
 }
 
@@ -37,15 +40,20 @@ void PopupLayer::setBackgroundImage(const std::string &backgroundImage) {
     this->addChild(backgroundSprite, 0);
 }
 
-void PopupLayer::setTitle(cocos2d::Label* titleLabel) {
-    this->addChild(titleLabel);
+void PopupLayer::setTitle(cocos2d::Label *titleLabel) {
+    titleLabel->setAnchorPoint(Point(0.5, 0.5));
+    titleLabel->setPosition(Point(0, 35));
+    this->addChild(titleLabel, 1);
 }
 
-void PopupLayer::setContext(const std::string &context) {
-    
+void PopupLayer::setContext(cocos2d::Label *contentLabel) {
+    contentLabel->setAnchorPoint(Point(0.5, 0.5));
+    contentLabel->setPosition(Point(0, 0));
+    this->addChild(contentLabel, 1);
 }
 
-void PopupLayer::addButton(const std::string &normalImage, const std::string &selectedImage, const std::string &title, std::function<bool (cocos2d::Object *)>) {
-    
+void PopupLayer::addMenuItem(cocos2d::MenuItem *menuItem, cocos2d::Point pos) {
+    menuItem->setPosition(pos);
+    this->_memu->addChild(menuItem, 1);
 }
 

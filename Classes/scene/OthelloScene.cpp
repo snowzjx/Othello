@@ -57,9 +57,6 @@ bool OthelloLayer::init(GameMode gameMode) {
     this->setGameMode(gameMode);
     this->_othello->startOthello();
     
-    //TODO: Test code here
-    this->popupUndoLayer();
-    
     this->scheduleUpdate();
     return true;
 }
@@ -177,9 +174,27 @@ void OthelloLayer::popupUndoLayer() {
     PopupLayer *popupLayer = PopupLayer::create();
     popupLayer->setBackgroundImage("PopupBG.png");
     popupLayer->setPosition(Point(winSize.width / 2, winSize.height / 2));
-    //TODO: Font path
-    auto titleLabel = Label::createWithTTF("Take Back", "", 20);
+    
+    auto titleLabel = (Label*)LabelTTF::create("Agree with taking back ?", "Helvetica.ttf", 10);
     titleLabel->setColor(FOREGROUND_COLOR);
+    popupLayer->setTitle(titleLabel);
+    
+    std::string player = this->_othello->getCurrentPlayer() == Player::BlackPlayer ? "black" : "white";
+    std::string infoStr = "The " + player + " player wants to take back his previous move, do you agree ?";
+    auto contextLabel = (Label*)LabelTTF::create(infoStr, "Helvetica.ttf", 8, Size(150, 0), TextHAlignment::LEFT);
+    contextLabel->setColor(Color3B::BLACK);
+    popupLayer->setContext(contextLabel);
+    
+    auto okLabel = LabelTTF::create("Ok", "Helvetica.ttf", 10);
+    okLabel->setColor(FOREGROUND_COLOR);
+    auto okItem = MenuItemLabel::create(okLabel, CC_CALLBACK_1(OthelloLayer::undoComfirmCallBack, this));
+    
+    auto cancelLabel = LabelTTF::create("Cancel", "Helvetica.ttf", 10);
+    cancelLabel->setColor(FOREGROUND_COLOR);
+    auto cancelItem = MenuItemLabel::create(cancelLabel, CC_CALLBACK_1(OthelloLayer::undoCancelCallBack, this));
+    
+    popupLayer->addMenuItem(okItem, Point(-45, 0));
+    popupLayer->addMenuItem(cancelItem, Point(45, 0));
     
     this->addChild(popupLayer, popupZOrder);
 }
