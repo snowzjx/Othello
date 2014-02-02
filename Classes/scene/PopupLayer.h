@@ -25,6 +25,7 @@ public:
     void addMenuItem(cocos2d::MenuItem* menuItem, cocos2d::Point pos);
 private:
     cocos2d::Menu *_memu;
+    cocos2d::EventListenerTouchOneByOne *listener;
 };
 
 #endif

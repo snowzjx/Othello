@@ -38,9 +38,11 @@ private:
     virtual void onEnter() override;
 	virtual void onExit() override;
     virtual void update(float delta) override;
-    void undoCallBack(Object* pSender);
-    void undoComfirmCallBack(Object *pSender);
-    void undoCancelCallBack(Object *pSender);
+    void undoCallBack(cocos2d::Object* pSender);
+    void undoComfirmCallBack(cocos2d::Object* pSender);
+    void undoCancelCallBack(cocos2d::Object* pSender);
+    void popupToolLayer(cocos2d::Point pos);
+    void hideToolLayer(cocos2d::Object* pSender);
     void popupUndoLayer();
     void createPieceAt(short i, short j, PieceSpriteStatus status );
     void changePieceStatusAt(short i, short j, PieceSpriteStatus status);
@@ -51,6 +53,7 @@ private:
     std::set<std::shared_ptr<ActionResponder>> _actionResponderSet;
     cocos2d::SpriteBatchNode* _piecesBatchNode;
     std::vector<PieceSprite*> _pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
+    cocos2d::EventListenerTouchOneByOne* listener;
 };
 
 #endif

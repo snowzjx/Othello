@@ -54,6 +54,11 @@ bool OthelloLayer::init(GameMode gameMode) {
     board->setPosition(Point(winSize.width / 2, winSize.height / 2));
     this->_piecesBatchNode->addChild(board, boardZOrder);
     
+    Sprite *notice = Sprite::createWithSpriteFrameName("Notice.png");
+    notice->setAnchorPoint(Point(0.5, 1));
+    notice->setPosition(Point(winSize.width / 2, winSize.height));
+    this->_piecesBatchNode->addChild(notice, noticeZOrder);
+    
     this->setGameMode(gameMode);
     this->_othello->startOthello();
     
@@ -100,11 +105,11 @@ std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
 
 void OthelloLayer::onEnter() {
     Layer::onEnter();
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
+    this->listener = EventListenerTouchOneByOne::create();
+    this->listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
         return true;
     };
-    listener->onTouchEnded = [&](Touch* touch, Event* event) {
+    this->listener->onTouchEnded = [&](Touch* touch, Event* event) {
         auto location = touch->getLocation();
         std::pair<short, short> boardPos = PointUtil::convertToBoardFromPoint(location);
         short x = std::get<0>(boardPos);
@@ -116,11 +121,11 @@ void OthelloLayer::onEnter() {
             }
         }
     };
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->listener, this);
 }
 
 void OthelloLayer::onExit() {
-	this->_eventDispatcher->removeAllEventListeners();
+	this->_eventDispatcher->removeEventListener(this->listener);
 }
 
 void OthelloLayer::update(float delta) {
@@ -173,6 +178,29 @@ void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
     }
 }
 
+void OthelloLayer::popupToolLayer(cocos2d::Point pos) {
+    PopupLayer *popupLayer = PopupLayer::create();
+    popupLayer->setBackgroundImage("TackBackPopupBG.png");
+    popupLayer->setPosition(Point(pos));
+    
+    auto tackBackLabel = LabelTTF::create("Tack Back", "Helvetica.ttf", 8);
+    tackBackLabel->setColor(FOREGROUND_COLOR);
+    auto tackBackItem = MenuItemLabel::create(tackBackLabel, CC_CALLBACK_1(OthelloLayer::undoCallBack, this));
+    popupLayer->addMenuItem(tackBackItem, Point(-25, 4));
+    
+    auto cancelLabel = LabelTTF::create("Cancel", "Helvetica.ttf", 8);
+    cancelLabel->setColor(FOREGROUND_COLOR);
+    auto cancelItem = MenuItemLabel::create(cancelLabel, CC_CALLBACK_1(OthelloLayer::hideToolLayer, this));
+    popupLayer->addMenuItem(cancelItem, Point(30, 4));
+    
+    this->addChild(popupLayer, popupZOrder, toolPopupTag);
+
+}
+
+void OthelloLayer::hideToolLayer(cocos2d::Object *pSender) {
+    this->removeChildByTag(toolPopupTag);
+}
+
 void OthelloLayer::popupUndoLayer() {
     Size winSize = Director::getInstance()->getWinSize();
     PopupLayer *popupLayer = PopupLayer::create();
@@ -200,7 +228,7 @@ void OthelloLayer::popupUndoLayer() {
     popupLayer->addMenuItem(okItem, Point(-45, -42));
     popupLayer->addMenuItem(cancelItem, Point(45, -42));
     
-    this->addChild(popupLayer, popupZOrder);
+    this->addChild(popupLayer, popupZOrder, undoPopupTag);
 }
 
 void OthelloLayer::createPieceAt(short i, short j, PieceSpriteStatus status ) {

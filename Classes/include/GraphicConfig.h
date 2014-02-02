@@ -14,10 +14,12 @@
 static const cocos2d::Color4B BACKGROUND_COLOR = cocos2d::Color4B(25, 110, 245, 255);
 static const cocos2d::Color3B FOREGROUND_COLOR = cocos2d::Color3B(25, 110, 245);
 static const int boardZOrder = 0;
-static const float boardStartX = 120.0;
-static const float boardStartY = 41.0;
-static const float boardDeltaMain = 240.0 * 135.0/ 1150.0;
-static const float boardDeltaGap = 240.0 * 10.0 / 1150.0;
+static const float boardEdge = 240.0;
+static const float boardDeltaMain = boardEdge * 135.0/ 1150.0;
+static const float boardDeltaGap = boardEdge * 10.0 / 1150.0;
 static const int pieceZOrder = 5;
+static const int noticeZOrder = 10;
 static const int popupZOrder = 15;
+static const int undoPopupTag = 1;
+static const int toolPopupTag = 2;
 #endif

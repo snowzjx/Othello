@@ -23,16 +23,18 @@ bool PopupLayer::init() {
 void PopupLayer::onEnter() {
     log("PopupLayer onEnter...");
     Layer::onEnter();
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->setSwallowTouches(true);
-    listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
+    this->listener = EventListenerTouchOneByOne::create();
+    this->listener->setSwallowTouches(true);
+    this->listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
         return true;
     };
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->listener, this);
 }
 
 void PopupLayer::onExit() {
-    this->_eventDispatcher->removeAllEventListeners();
+    log("PopupLauyer onExit...");
+    Layer::onExit();
+    this->_eventDispatcher->removeEventListener(this->listener);
 }
 
 void PopupLayer::setBackgroundImage(const std::string &backgroundImage) {
