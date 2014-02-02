@@ -119,6 +119,10 @@ void OthelloLayer::onEnter() {
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
+void OthelloLayer::onExit() {
+	this->_eventDispatcher->removeAllEventListeners();
+}
+
 void OthelloLayer::update(float delta) {
 	auto currentBoardState = this->_othello->getBoard()->getBoardState();
 	if (this->_storedBoardState == nullptr || this->_storedBoardState != currentBoardState) {
@@ -193,8 +197,8 @@ void OthelloLayer::popupUndoLayer() {
     cancelLabel->setColor(FOREGROUND_COLOR);
     auto cancelItem = MenuItemLabel::create(cancelLabel, CC_CALLBACK_1(OthelloLayer::undoCancelCallBack, this));
     
-    popupLayer->addMenuItem(okItem, Point(-45, 0));
-    popupLayer->addMenuItem(cancelItem, Point(45, 0));
+    popupLayer->addMenuItem(okItem, Point(-45, -42));
+    popupLayer->addMenuItem(cancelItem, Point(45, -42));
     
     this->addChild(popupLayer, popupZOrder);
 }

@@ -36,6 +36,7 @@ public:
 private:
     std::shared_ptr<Engine> createPlayerEngine();
     virtual void onEnter() override;
+	virtual void onExit() override;
     virtual void update(float delta) override;
     void undoCallBack(Object* pSender);
     void undoComfirmCallBack(Object *pSender);
