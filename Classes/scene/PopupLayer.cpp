@@ -15,7 +15,7 @@ bool PopupLayer::init() {
         return false;
     }
     this->_memu = Menu::create();
-    this->_memu->setPosition(Point(0, -42));
+    this->_memu->setPosition(Point(0, 0));
     this->addChild(this->_memu, 1);
     return true;
 }
