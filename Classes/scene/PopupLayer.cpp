@@ -42,13 +42,13 @@ void PopupLayer::setBackgroundImage(const std::string &backgroundImage) {
     this->addChild(backgroundSprite, 0);
 }
 
-void PopupLayer::setTitle(cocos2d::Label *titleLabel) {
+void PopupLayer::setTitle(cocos2d::LabelTTF *titleLabel) {
     titleLabel->setAnchorPoint(Point(0.5, 0.5));
     titleLabel->setPosition(Point(0, 35));
     this->addChild(titleLabel, 1);
 }
 
-void PopupLayer::setContext(cocos2d::Label *contentLabel) {
+void PopupLayer::setContext(cocos2d::LabelTTF *contentLabel) {
     contentLabel->setAnchorPoint(Point(0.5, 0.5));
     contentLabel->setPosition(Point(0, 0));
     this->addChild(contentLabel, 1);

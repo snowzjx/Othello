@@ -20,8 +20,8 @@ public:
     virtual void onEnter() override;
     virtual void onExit() override;
     void setBackgroundImage(const std::string& backgroundImage);
-    void setTitle(cocos2d::Label* titleLabel);
-    void setContext(cocos2d::Label* contentLabel);
+    void setTitle(cocos2d::LabelTTF* titleLabel);
+    void setContext(cocos2d::LabelTTF* contentLabel);
     void addMenuItem(cocos2d::MenuItem* menuItem, cocos2d::Point pos);
 private:
     cocos2d::Menu *_memu;

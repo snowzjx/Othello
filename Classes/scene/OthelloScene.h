@@ -44,8 +44,11 @@ private:
     void popupToolLayer(cocos2d::Point pos);
     void hideToolLayer(cocos2d::Object* pSender);
     void popupUndoLayer();
+    void hidePopupUndoLayer();
     void createPieceAt(short i, short j, PieceSpriteStatus status );
     void changePieceStatusAt(short i, short j, PieceSpriteStatus status);
+    void removePieceAt(short i, short j);
+    void setLongPress(float delta);
     
 private:
     std::shared_ptr<Othello> _othello = std::shared_ptr<Othello>(Singleton<Othello>::getInstance());
@@ -54,6 +57,7 @@ private:
     cocos2d::SpriteBatchNode* _piecesBatchNode;
     std::vector<PieceSprite*> _pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
     cocos2d::EventListenerTouchOneByOne* listener;
+    bool _isLongPress = false;
 };
 
 #endif

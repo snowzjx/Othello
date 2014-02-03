@@ -13,6 +13,7 @@
 #include "../include/GraphicConfig.h"
 #include "../util/PointUtil.h"
 #include "../util/AnimationUtil.h"
+#include "../util/PlayerUtil.h"
 #include "PopupLayer.h"
 
 USING_NS_CC;
@@ -107,17 +108,29 @@ void OthelloLayer::onEnter() {
     Layer::onEnter();
     this->listener = EventListenerTouchOneByOne::create();
     this->listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
+        this->scheduleOnce(schedule_selector(OthelloLayer::setLongPress), 0.3);
         return true;
     };
+    this->listener->onTouchMoved = [&](Touch* touch, Event* event) {
+        this->unschedule(schedule_selector(OthelloLayer::setLongPress));
+    };
     this->listener->onTouchEnded = [&](Touch* touch, Event* event) {
-        auto location = touch->getLocation();
-        std::pair<short, short> boardPos = PointUtil::convertToBoardFromPoint(location);
-        short x = std::get<0>(boardPos);
-        short y = std::get<1>(boardPos);
-        log("Touch event, x: %d, y: %d.", x, y);
-        for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
-            if ((*itr)->respondToMoveAction(x, y)) {
-                break;
+        this->unschedule(schedule_selector(OthelloLayer::setLongPress));
+        if (this->_isLongPress) {
+            log("Long press event.");
+            auto location = touch->getLocation();
+            this->popupToolLayer(location);
+            this->_isLongPress = false;
+        } else {
+            auto location = touch->getLocation();
+            std::pair<short, short> boardPos = PointUtil::convertToBoardFromPoint(location);
+            short x = std::get<0>(boardPos);
+            short y = std::get<1>(boardPos);
+            log("Touch event, x: %d, y: %d.", x, y);
+            for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
+                if ((*itr)->respondToMoveAction(x, y)) {
+                    break;
+                }
             }
         }
     };
@@ -138,7 +151,11 @@ void OthelloLayer::update(float delta) {
                 auto deltaValue = (*currentBoardState)[i][j] - (this->_storedBoardState == nullptr ? 0 : (*this->_storedBoardState)[i][j]);
                 auto newStatus = (*currentBoardState)[i][j] == 1 ? PieceSpriteStatus::BlackPiece : PieceSpriteStatus::WhitePiece;
                 if (abs(deltaValue) == 1) {
-                    this->createPieceAt(i, j, newStatus);
+                    if ((*currentBoardState)[i][j] == 0) {
+                        this->removePieceAt(i, j);
+                    } else {
+                        this->createPieceAt(i, j, newStatus);
+                    }
                 } else if (abs(deltaValue) == 2) {
                     this->changePieceStatusAt(i, j, newStatus);
                 }
@@ -149,12 +166,13 @@ void OthelloLayer::update(float delta) {
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->getStatus() == ActionResponderStatus::NEED_TO_ASK_FOR_USER_COMFIRM) {
             (*itr)->setStatus(ActionResponderStatus::WAITING_FOR_USER_COMFIRM_ACTION);
-            //TODO: add pop over layer
+            this->popupUndoLayer();
         }
     }
 }
 
 void OthelloLayer::undoCallBack(cocos2d::Object *pSender) {
+    this->hideToolLayer(this);
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->respondToUndoAction()) {
             break;
@@ -163,6 +181,7 @@ void OthelloLayer::undoCallBack(cocos2d::Object *pSender) {
 }
 
 void OthelloLayer::undoComfirmCallBack(cocos2d::Object *pSender) {
+    this->hidePopupUndoLayer();
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->respondToUndoComfirmAction(true)) {
             break;
@@ -171,6 +190,7 @@ void OthelloLayer::undoComfirmCallBack(cocos2d::Object *pSender) {
 }
 
 void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
+    this->hidePopupUndoLayer();
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
         if ((*itr)->respondToUndoComfirmAction(false)) {
             break;
@@ -207,13 +227,13 @@ void OthelloLayer::popupUndoLayer() {
     popupLayer->setBackgroundImage("PopupBG.png");
     popupLayer->setPosition(Point(winSize.width / 2, winSize.height / 2));
     
-    auto titleLabel = (Label*)LabelTTF::create("Agree with taking back ?", "Helvetica.ttf", 10);
+    auto titleLabel = LabelTTF::create("Agree with taking back ?", "Helvetica.ttf", 10);
     titleLabel->setColor(FOREGROUND_COLOR);
     popupLayer->setTitle(titleLabel);
     
-    std::string player = this->_othello->getCurrentPlayer() == Player::BlackPlayer ? "black" : "white";
+    std::string player = PlayerUtil::swapPlayer(this->_othello->getCurrentPlayer()) == Player::BlackPlayer ? "black" : "white";
     std::string infoStr = "The " + player + " player wants to take back his previous move, do you agree ?";
-    auto contextLabel = (Label*)LabelTTF::create(infoStr, "Helvetica.ttf", 8, Size(150, 0), TextHAlignment::LEFT);
+    auto contextLabel = LabelTTF::create(infoStr, "Helvetica.ttf", 8, Size(150, 0), TextHAlignment::LEFT);
     contextLabel->setColor(Color3B::BLACK);
     popupLayer->setContext(contextLabel);
     
@@ -231,6 +251,10 @@ void OthelloLayer::popupUndoLayer() {
     this->addChild(popupLayer, popupZOrder, undoPopupTag);
 }
 
+void OthelloLayer::hidePopupUndoLayer() {
+    this->removeChildByTag(undoPopupTag);
+}
+
 void OthelloLayer::createPieceAt(short i, short j, PieceSpriteStatus status ) {
     PieceSprite *pieceSprite = PieceSprite::createWithPieceSpriteStatus(status);
     pieceSprite->setScale(0);
@@ -241,4 +265,12 @@ void OthelloLayer::createPieceAt(short i, short j, PieceSpriteStatus status ) {
 }
 void OthelloLayer::changePieceStatusAt(short i, short j, PieceSpriteStatus status) {
     this->_pieceSpriteVector[i * BOARD_WIDTH + j]->setStatus(status);
+}
+
+void OthelloLayer::removePieceAt(short i, short j) {
+    auto piece = this->_pieceSpriteVector[i * BOARD_WIDTH + j];
+    piece->removeFromParent();
+}
+void OthelloLayer::setLongPress(float delta) {
+    this->_isLongPress = true;
 }
