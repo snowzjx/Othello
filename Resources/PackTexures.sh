@@ -44,5 +44,32 @@ ${TP} --smart-update \
 --opt RGBA4444 \
 ../OthelloArt/OthelloScene/*.png
 
+${TP} --smart-update \
+--format cocos2d \
+--data 1536p/menuscene.plist \
+--sheet 1536p/menuscene.pvr.ccz \
+--dither-fs-alpha \
+--opt RGBA4444 \
+../OthelloArt/MenuScene/*.png
+
+${TP} --smart-update \
+--format cocos2d \
+--data 768p/menuscene.plist \
+--sheet 768p/menuscene.pvr.ccz \
+--dither-fs-alpha \
+--scale 0.5 \
+--opt RGBA4444 \
+../OthelloArt/MenuScene/*.png
+
+${TP} --smart-update \
+--format cocos2d \
+--data 320p/menuscene.plist \
+--sheet 320p/menuscene.pvr.ccz \
+--dither-fs-alpha \
+--scale 0.25 \
+--opt RGBA4444 \
+../OthelloArt/MenuScene/*.png
+
+
 fi
 exit 0
