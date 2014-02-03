@@ -57,11 +57,9 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
     bool moveValid = false;
     for (auto itr = std::begin(searchDirections); itr != std::end(searchDirections); ++itr) {
         auto direction = *itr;
-        short searchX = x;
-        short searchY = y;
-        while (searchX >=0 && searchX <= BOARD_WIDTH - 1 && searchY >=0 && searchY <= BOARD_HEIGHT - 1) {
-            searchX += std::get<0>(direction);
-            searchY += std::get<1>(direction);
+        short searchX = x + std::get<0>(direction);
+        short searchY = y + std::get<1>(direction);
+        while (searchX >=0 && searchX <= BOARD_WIDTH - 1 && searchY >=0 && searchY <= BOARD_HEIGHT - 1){
             if ((*boardState)[searchX][searchY] == player) {
                 this->_playerScoreMap[player] += path.size();
                 this->_playerScoreMap[PlayerUtil::swapPlayer(player)] -= path.size();
@@ -76,6 +74,8 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
             if ((*boardState)[searchX][searchY] == NO_PLAYER) {
                 break;
             }
+            searchX += std::get<0>(direction);
+            searchY += std::get<1>(direction);
         }
         path.clear();
     }
