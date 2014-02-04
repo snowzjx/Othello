@@ -4,18 +4,31 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>OthelloLogo.png</key>
+            <key>BlackWinner.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{389,504}}</string>
+                <string>{{2,250},{300,246}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{389,504}}</string>
+                <string>{{0,0},{300,246}}</string>
                 <key>sourceSize</key>
-                <string>{389,504}</string>
+                <string>{300,246}</string>
+            </dict>
+            <key>WhiteWinner.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{300,246}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{300,246}}</string>
+                <key>sourceSize</key>
+                <string>{300,246}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -23,13 +36,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>menuscene.pvr.ccz</string>
+            <string>finishscene.pvr.ccz</string>
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:10fc2e4adde0b03cfad16a58349b3c69:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:88b184ac40b667c4cc20ca8b4919cd56:1/1$</string>
             <key>textureFileName</key>
-            <string>menuscene.pvr.ccz</string>
+            <string>finishscene.pvr.ccz</string>
         </dict>
     </dict>
 </plist>

@@ -22,4 +22,5 @@ static const int noticeZOrder = 10;
 static const int popupZOrder = 15;
 static const int undoPopupTag = 1;
 static const int toolPopupTag = 2;
+
 #endif

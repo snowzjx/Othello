@@ -70,6 +70,32 @@ ${TP} --smart-update \
 --opt RGBA4444 \
 ../OthelloArt/MenuScene/*.png
 
+${TP} --smart-update \
+--format cocos2d \
+--data 1536p/finishscene.plist \
+--sheet 1536p/finishscene.pvr.ccz \
+--dither-fs-alpha \
+--opt RGBA4444 \
+../OthelloArt/FinishScene/*.png
+
+${TP} --smart-update \
+--format cocos2d \
+--data 768p/finishscene.plist \
+--sheet 768p/finishscene.pvr.ccz \
+--dither-fs-alpha \
+--scale 0.5 \
+--opt RGBA4444 \
+../OthelloArt/FinishScene/*.png
+
+${TP} --smart-update \
+--format cocos2d \
+--data 320p/finishscene.plist \
+--sheet 320p/finishscene.pvr.ccz \
+--dither-fs-alpha \
+--scale 0.25 \
+--opt RGBA4444 \
+../OthelloArt/FinishScene/*.png
+
 
 fi
 exit 0

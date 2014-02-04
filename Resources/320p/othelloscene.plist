@@ -183,7 +183,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:12852ff912a65846db249b7ee585dbec:128497a8f5087b4280d6d81f107bb9e6:ed0f13f63c08ca5cd049e14c3a95b074$</string>
+            <string>$TexturePacker:SmartUpdate:300a1aef77b351c9c31073e567a39cff:1/1$</string>
             <key>textureFileName</key>
             <string>othelloscene.pvr.ccz</string>
         </dict>
