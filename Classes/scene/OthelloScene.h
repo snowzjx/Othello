@@ -56,6 +56,7 @@ private:
     std::set<std::shared_ptr<ActionResponder>> _actionResponderSet;
     cocos2d::SpriteBatchNode* _piecesBatchNode;
     std::vector<PieceSprite*> _pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
+    std::map<Player, cocos2d::LabelTTF*> _userScoreMap;
     cocos2d::EventListenerTouchOneByOne* listener;
     bool _isLongPress = false;
 };

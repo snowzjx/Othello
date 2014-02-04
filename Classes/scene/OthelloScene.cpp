@@ -60,6 +60,20 @@ bool OthelloLayer::init(GameMode gameMode) {
     notice->setPosition(Point(winSize.width / 2, winSize.height));
     this->_piecesBatchNode->addChild(notice, noticeZOrder);
     
+    LabelTTF *blackPlayerScore = LabelTTF::create("0", "Helvetica.ttf", 10);
+    LabelTTF *whitePlayerScore = LabelTTF::create("0", "Helvetica.ttf", 10);
+    
+    blackPlayerScore->setColor(FOREGROUND_COLOR);
+    whitePlayerScore->setColor(FOREGROUND_COLOR);
+    
+    blackPlayerScore->setPosition(Point(winSize.width / 2 - 15, winSize.height - 10));
+    whitePlayerScore->setPosition(Point(winSize.width / 2 + 35, winSize.height - 10));
+    
+    this->_userScoreMap[Player::BlackPlayer] = blackPlayerScore;
+    this->_userScoreMap[Player::WhitePlayer] = whitePlayerScore;
+    this->addChild(blackPlayerScore, noticeZOrder + 1);
+    this->addChild(whitePlayerScore, noticeZOrder + 1);
+    
     this->setGameMode(gameMode);
     this->_othello->startOthello();
     
@@ -161,6 +175,8 @@ void OthelloLayer::update(float delta) {
                 }
             }
         }
+        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::BlackPlayer)));
+        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::WhitePlayer)));
         this->_storedBoardState = currentBoardState;
 	}
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {

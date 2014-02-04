@@ -46,6 +46,10 @@ const std::shared_ptr<std::stack<Player>> Othello::getPlayerStack() {
     return this->_playStack;
 }
 
+const short Othello::getPlayerScore(Player player) {
+    return this->_board->getPlayerScore(player);
+}
+
 void Othello::startOthello() {
 	this->_board = std::shared_ptr<Board>(new Board);
     this->_playStack->push(Player::BlackPlayer);

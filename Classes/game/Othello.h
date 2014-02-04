@@ -43,6 +43,7 @@ public:
     const std::shared_ptr<Board> getBoard();
     const std::vector<std::pair<unsigned short, unsigned short>>& getPlayerAvailPos(Player player);
     const std::shared_ptr<std::stack<Player>> getPlayerStack();
+    const short getPlayerScore(Player player);
     void startOthello();
     void endOthello();
 	~Othello();
