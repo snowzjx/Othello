@@ -31,6 +31,7 @@ public:
     bool popOneBoardState();
     bool move(Player player, unsigned short x, unsigned short y);
     unsigned short getPlayerScore(Player player);
+    const std::map<Player, unsigned short>& getPlayerScoreMap();
 };
 
 #endif

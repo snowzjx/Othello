@@ -90,3 +90,7 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
 unsigned short Board::getPlayerScore(Player player) {
     return this->_playerScoreMap[player];
 }
+
+const std::map<Player,unsigned short>& Board::getPlayerScoreMap() {
+    return this->_playerScoreMap;
+}

@@ -21,7 +21,6 @@ bool PopupLayer::init() {
 }
 
 void PopupLayer::onEnter() {
-    log("PopupLayer onEnter...");
     Layer::onEnter();
     this->listener = EventListenerTouchOneByOne::create();
     this->listener->setSwallowTouches(true);
@@ -32,7 +31,6 @@ void PopupLayer::onEnter() {
 }
 
 void PopupLayer::onExit() {
-    log("PopupLauyer onExit...");
     Layer::onExit();
     this->_eventDispatcher->removeEventListener(this->listener);
 }

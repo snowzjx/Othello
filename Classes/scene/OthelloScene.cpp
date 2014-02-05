@@ -15,6 +15,7 @@
 #include "../util/AnimationUtil.h"
 #include "../util/PlayerUtil.h"
 #include "PopupLayer.h"
+#include "GameFinishScene.h"
 
 USING_NS_CC;
 
@@ -41,9 +42,6 @@ bool OthelloLayer::init(GameMode gameMode) {
     if (!LayerColor::initWithColor(BACKGROUND_COLOR)) {
         return false;
     }
-    
-    this->_othello->setDelegate(this);
-    
     Size winSize = Director::getInstance()->getWinSize();
     
     this->_piecesBatchNode = SpriteBatchNode::create("othelloscene.pvr.ccz");
@@ -75,7 +73,6 @@ bool OthelloLayer::init(GameMode gameMode) {
     this->addChild(whitePlayerScore, noticeZOrder + 1);
     
     this->setGameMode(gameMode);
-    this->_othello->startOthello();
     
     this->scheduleUpdate();
     return true;
@@ -106,10 +103,6 @@ void OthelloLayer::setGameMode(GameMode gameMode) {
     }
     this->_othello->setEngine(Player::BlackPlayer, bEngine);
     this->_othello->setEngine(Player::WhitePlayer, wEngine);
-}
-
-void OthelloLayer::othelloGameDidFinish() {
-    log("Game Did Finish!");
 }
 
 std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
@@ -149,13 +142,20 @@ void OthelloLayer::onEnter() {
         }
     };
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->listener, this);
+    this->_othello->startOthello();
 }
 
 void OthelloLayer::onExit() {
+    Layer::onExit();
 	this->_eventDispatcher->removeEventListener(this->listener);
 }
 
 void OthelloLayer::update(float delta) {
+    if (!this->_othello->getIsGameRun()) {
+        log("Game Did Finish!");
+        auto scene = GameFinishLayer::createScene(this->_othello->getPlayerScoreMap());
+        Director::getInstance()->pushScene(scene);
+    }
 	auto currentBoardState = this->_othello->getBoard()->getBoardState();
 	if (this->_storedBoardState == nullptr || this->_storedBoardState != currentBoardState) {
 		log("Othello board is updating ...");

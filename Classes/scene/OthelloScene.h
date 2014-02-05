@@ -20,18 +20,16 @@
 #include "../core/Board.h"
 #include "../core/Matrix.h"
 #include "../game/GameMode.h"
-#include "../game/OthelloDelegate.h"
 #include "../control/ActionResponder.h"
 #include "../sprite/PieceSprite.h"
 #include "../sprite/PieceSpriteStatus.h"
 
-class OthelloLayer: public cocos2d::LayerColor, public OthelloDelegate {
+class OthelloLayer: public cocos2d::LayerColor{
 public:
     static cocos2d::Scene* createScene(GameMode gameMode);
     static OthelloLayer* create(GameMode gameMode);
     virtual bool init(GameMode gameMode);
     void setGameMode(GameMode gameMode);
-    virtual void othelloGameDidFinish() override;
 
 private:
     std::shared_ptr<Engine> createPlayerEngine();

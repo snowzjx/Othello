@@ -16,10 +16,6 @@ Othello::Othello() {
     this->_playStack = std::shared_ptr<std::stack<Player>>(new std::stack<Player>());
 }
 
-void Othello::setDelegate(OthelloDelegate *delegate) {
-    this->_delegate = delegate;
-}
-
 void Othello::setEngine(Player player, std::shared_ptr<Engine> enginePtr) {
     enginePtr->setPlayer(player);
     enginePtr->setOthello(this->shared_from_this());
@@ -50,22 +46,27 @@ const short Othello::getPlayerScore(Player player) {
     return this->_board->getPlayerScore(player);
 }
 
+const std::map<Player, unsigned short>& Othello::getPlayerScoreMap() {
+    return this->_board->getPlayerScoreMap();
+}
+
+bool Othello::getIsGameRun() {
+    return this->_isGameShouldRun;
+}
+
 void Othello::startOthello() {
 	this->_board = std::shared_ptr<Board>(new Board);
     this->_playStack->push(Player::BlackPlayer);
 	this->_playerEngineMap[Player::BlackPlayer]->start();
 	this->_playerEngineMap[Player::WhitePlayer]->start();
     this->_isGameShouldRun = true;
-    this->_othelloThread = std::thread(&Othello::othelloThreadStart, this);
+    this->_othelloThread = new std::thread(&Othello::othelloThreadStart, this);
 }
 
 void Othello::endOthello() {
 	this->_isGameShouldRun = false;
 	this->_playerEngineMap[Player::BlackPlayer]->stop();
 	this->_playerEngineMap[Player::WhitePlayer]->stop();
-	if (this->_othelloThread.joinable()) {
-		this->_othelloThread.join();
-	}
 }
 
 void Othello::updateAvailPos(Player player) {
@@ -116,6 +117,7 @@ void Othello::othelloThreadStart() {
             Player enemyPlayer = PlayerUtil::swapPlayer(currentPlayer);
             this->updateAvailPos(enemyPlayer);
             if (this->_playAvailPosMap[enemyPlayer].size() == 0) {
+                this->endOthello();
                 break;
             } else {
                 this->nextPlayer();
@@ -127,13 +129,14 @@ void Othello::othelloThreadStart() {
             }
         }
     }
-    if (this->_delegate != nullptr) {
-        this->_delegate->othelloGameDidFinish();
-    }
 }
 
 Othello::~Othello() {
 	this->endOthello();
+    if (this->_othelloThread && this->_othelloThread->joinable()) {
+		this->_othelloThread->join();
+        delete _othelloThread;
+	}
 }
 
 
