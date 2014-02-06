@@ -14,6 +14,7 @@
 Othello::Othello() {
 	this->_isGameShouldRun = false;
     this->_playStack = std::shared_ptr<std::stack<Player>>(new std::stack<Player>());
+    this->_showMoveTip = false;
 }
 
 void Othello::setEngine(Player player, std::shared_ptr<Engine> enginePtr) {
@@ -48,6 +49,14 @@ const short Othello::getPlayerScore(Player player) {
 
 const std::map<Player, unsigned short>& Othello::getPlayerScoreMap() {
     return this->_board->getPlayerScoreMap();
+}
+
+void Othello::setShouldShowMoveTip() {
+    this->_showMoveTip = true;
+}
+
+bool Othello::getShouldShowMoveTip() {
+    return this->_showMoveTip;
 }
 
 bool Othello::getIsGameRun() {
@@ -86,17 +95,17 @@ void Othello::updateAvailPos(Player player) {
                 short posX = std::get<0>(*enemyPosItr) + std::get<0>(*directionItr);
                 short posY = std::get<1>(*enemyPosItr) + std::get<1>(*directionItr);
                 if (posX >= 0 && posX <= BOARD_WIDTH - 1 && posY >= 0 && posY <= BOARD_HEIGHT - 1 && boardStatus[posX][posY] == NO_PLAYER) {
-                    short searchX = posX;
-                    short searchY = posY;
+                    short searchX = posX - std::get<0>(*directionItr);
+                    short searchY = posY - std::get<1>(*directionItr);
                     while (searchX >= 0 && searchX <= BOARD_WIDTH - 1 && searchY >= 0 && searchY <= BOARD_HEIGHT - 1) {
-                        searchX -= std::get<0>(*directionItr);
-                        searchY -= std::get<1>(*directionItr);
                         if (boardStatus[searchX][searchY] == player) {
                             availPos.push_back({posX, posY});
                         }
                         if (boardStatus[searchX][searchY] == NO_PLAYER) {
                             break;
                         }
+                        searchX -= std::get<0>(*directionItr);
+                        searchY -= std::get<1>(*directionItr);
                     }
                 }
             }

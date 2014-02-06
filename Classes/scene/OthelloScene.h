@@ -46,6 +46,8 @@ private:
     void createPieceAt(short i, short j, PieceSpriteStatus status );
     void changePieceStatusAt(short i, short j, PieceSpriteStatus status);
     void removePieceAt(short i, short j);
+    void createMoveTipAt(Player player, short i, short j);
+    void clearMoveTip();
     void setLongPress(float delta);
     
 private:
@@ -54,6 +56,7 @@ private:
     std::set<std::shared_ptr<ActionResponder>> _actionResponderSet;
     cocos2d::SpriteBatchNode* _piecesBatchNode;
     std::vector<PieceSprite*> _pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
+    std::vector<cocos2d::Sprite*> _moveTipSpriteVector;
     std::map<Player, cocos2d::LabelTTF*> _userScoreMap;
     cocos2d::EventListenerTouchOneByOne* listener;
     bool _isLongPress = false;

@@ -26,6 +26,7 @@ private:
     std::map<Player, std::vector<std::pair<unsigned short, unsigned short>>> _playAvailPosMap;
     std::shared_ptr<std::stack<Player>> _playStack;
     std::thread* _othelloThread;
+    bool _showMoveTip;
     
 private:
     void updateAvailPos(Player player);
@@ -42,6 +43,8 @@ public:
     const std::shared_ptr<std::stack<Player>> getPlayerStack();
     const short getPlayerScore(Player player);
     const std::map<Player, unsigned short>& getPlayerScoreMap();
+    void setShouldShowMoveTip();
+    bool getShouldShowMoveTip();
     bool getIsGameRun();
     void startOthello();
     void endOthello();

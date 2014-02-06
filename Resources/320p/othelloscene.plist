@@ -173,6 +173,32 @@
                 <key>sourceSize</key>
                 <string>{126,40}</string>
             </dict>
+            <key>TipBlack.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{205,400},{30,32}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{30,32}}</string>
+                <key>sourceSize</key>
+                <string>{34,34}</string>
+            </dict>
+            <key>TipWhite.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{171,400},{30,32}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{30,32}}</string>
+                <key>sourceSize</key>
+                <string>{34,34}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -183,7 +209,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:300a1aef77b351c9c31073e567a39cff:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:9eb5a5577a3874a71cd02e70a956c3af:1/1$</string>
             <key>textureFileName</key>
             <string>othelloscene.pvr.ccz</string>
         </dict>

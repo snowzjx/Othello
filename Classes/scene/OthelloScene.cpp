@@ -177,6 +177,17 @@ void OthelloLayer::update(float delta) {
         }
         this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::BlackPlayer)));
         this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::WhitePlayer)));
+        if (this->_othello->getShouldShowMoveTip()) {
+            log("Showing move tip ...");
+            auto currentPlayer = this->_othello->getCurrentPlayer();
+            auto availPos = this->_othello->getPlayerAvailPos(currentPlayer);
+            if (availPos.size() > 0) {
+                this->clearMoveTip();
+                for (auto itr = std::begin(availPos); itr != std::end(availPos); ++itr) {
+                    this->createMoveTipAt(currentPlayer, std::get<0>(*itr), std::get<1>(*itr));
+                }
+            }
+        }
         this->_storedBoardState = currentBoardState;
 	}
     for (auto itr = std::begin(this->_actionResponderSet); itr != std::end(this->_actionResponderSet); ++itr) {
@@ -287,6 +298,27 @@ void OthelloLayer::removePieceAt(short i, short j) {
     auto piece = this->_pieceSpriteVector[i * BOARD_WIDTH + j];
     piece->removeFromParent();
 }
+
+void OthelloLayer::createMoveTipAt(Player player, short i, short j) {
+    std::string frameName = player == Player::BlackPlayer ? "TipBlack.png" : "TipWhite.png";
+    auto tipSprite = Sprite::createWithSpriteFrameName(frameName);
+    tipSprite->setScale(0);
+    tipSprite->setPosition(PointUtil::convertToPointFromBoard(i, j));
+    this->_moveTipSpriteVector.push_back(tipSprite);
+    this->_piecesBatchNode->addChild(tipSprite, pieceZOrder);
+    tipSprite->runAction(ScaleTo::create(0.2, 1));
+}
+
+void OthelloLayer::clearMoveTip() {
+    if (this->_moveTipSpriteVector.size() > 0) {
+        for (auto itr = std::begin(this->_moveTipSpriteVector); itr != std::end(this->_moveTipSpriteVector); ++itr) {
+            (*itr)->runAction(ScaleTo::create(0.2, 0));
+            (*itr)->removeFromParent();
+        }
+        this->_moveTipSpriteVector.clear();
+    }
+}
+
 void OthelloLayer::setLongPress(float delta) {
     this->_isLongPress = true;
 }

@@ -86,6 +86,5 @@ void GameFinishLayer::restartClickCallBack(cocos2d::Object *pSender) {
 }
 
 void GameFinishLayer::quitClickCallback(cocos2d::Object *pSender) {
-    auto scene = MenuLayer::createScene();
-    Director::getInstance()->replaceScene(scene);
+    Director::getInstance()->popToRootScene();
 }

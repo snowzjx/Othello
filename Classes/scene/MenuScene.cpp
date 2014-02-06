@@ -55,11 +55,11 @@ bool MenuLayer::init() {
 
 void MenuLayer::onePlayerCallBack(cocos2d::Object *pSender) {
     auto scene = OthelloLayer::createScene(GameMode::humanVsAi);
-    Director::getInstance()->replaceScene(scene);
+    Director::getInstance()->pushScene(scene);
 }
 
 void MenuLayer::twoPlayerCallBack(cocos2d::Object *pSender) {
-    auto scene = OthelloLayer::createScene(GameMode::humanVsHuman);
-    Director::getInstance()->replaceScene(scene);
+    auto scene = OthelloLayer::createScene(GameMode::aiVsAi);
+    Director::getInstance()->pushScene(scene);
 
 }

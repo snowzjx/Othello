@@ -1,5 +1,7 @@
 #include "AppDelegate.h"
 #include "./scene/MenuScene.h"
+#include "./util/Singleton.h"
+#include "./game/Othello.h"
 
 USING_NS_CC;
 
@@ -47,6 +49,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	searchPath.push_back(animationSearchPath);
     searchPath.push_back(fontSearchPath);
     FileUtils::getInstance()->setSearchPaths(searchPath);
+    
+    Singleton<Othello>::getInstance()->setShouldShowMoveTip();
     
     // turn on display FPS
     director->setDisplayStats(true);
