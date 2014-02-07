@@ -22,7 +22,6 @@ AIEngine::~AIEngine() {
 }
 
 std::function<bool()> AIEngine::getNextAction() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     return [&]() -> bool {
         auto availPos = Singleton<Othello>::getInstance()->getPlayerAvailPos(this->_player);
         int size = availPos.size();
