@@ -18,7 +18,7 @@
 #include "../core/Player.h"
 #include "../engine/Engine.h"
 
-class Othello final: public std::enable_shared_from_this<Othello> {
+class Othello final {
 private:
     std::atomic_bool _isGameShouldRun;
     std::shared_ptr<Board> _board;

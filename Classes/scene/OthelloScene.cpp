@@ -51,8 +51,6 @@ bool OthelloLayer::init(GameMode gameMode) {
         return false;
     }
     
-    this->_gameMode = gameMode;
-
     this->_pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
     
     Size winSize = Director::getInstance()->getWinSize();
@@ -84,6 +82,8 @@ bool OthelloLayer::init(GameMode gameMode) {
     this->_userScoreMap[Player::WhitePlayer] = whitePlayerScore;
     this->addChild(blackPlayerScore, noticeZOrder + 1);
     this->addChild(whitePlayerScore, noticeZOrder + 1);
+    
+    this->setGameMode(gameMode);
     
     this->scheduleUpdate();
     return true;
@@ -153,7 +153,6 @@ void OthelloLayer::onEnter() {
         }
     };
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->_listener, this);
-    this->setGameMode(this->_gameMode);
     Singleton<Othello>::getInstance()->startOthello();
 }
 

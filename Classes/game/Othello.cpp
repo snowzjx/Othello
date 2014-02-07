@@ -74,11 +74,8 @@ void Othello::startOthello() {
 
 void Othello::endOthello() {
 	this->_isGameShouldRun = false;
-    if(this->_playerEngineMap.size() > 0) {
-        this->_playerEngineMap[Player::BlackPlayer]->stop();
-        this->_playerEngineMap[Player::WhitePlayer]->stop();
-        this->_playerEngineMap.clear();
-    }
+    this->_playerEngineMap[Player::BlackPlayer]->stop();
+    this->_playerEngineMap[Player::WhitePlayer]->stop();
 }
 
 void Othello::updateAvailPos(Player player) {

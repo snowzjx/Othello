@@ -61,7 +61,6 @@ private:
     std::map<Player, cocos2d::LabelTTF*> _userScoreMap;
     cocos2d::EventListenerTouchOneByOne* _listener;
     bool _isLongPress = false;
-    GameMode _gameMode;
 };
 
 #endif
