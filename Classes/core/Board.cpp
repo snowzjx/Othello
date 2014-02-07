@@ -82,8 +82,8 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
     if (moveValid) {
         this->_playerScoreMap[player] ++;
         (*boardState)[x][y] = player;
+		this->_boardStateStack.push(boardState);
     }
-    this->_boardStateStack.push(boardState);
     return moveValid;
 }
 

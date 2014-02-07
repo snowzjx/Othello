@@ -25,7 +25,6 @@ OthelloLayer::OthelloLayer() {
 
 OthelloLayer::~OthelloLayer() {
     log("~OthelloLayer ...");
-    CC_SAFE_DELETE(this->_piecesBatchNode);
 }
 
 Scene* OthelloLayer::createScene(GameMode gameMode) {
