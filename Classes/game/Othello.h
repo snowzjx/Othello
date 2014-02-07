@@ -41,8 +41,7 @@ public:
     const std::shared_ptr<Board> getBoard();
     const std::vector<std::pair<unsigned short, unsigned short>>& getPlayerAvailPos(Player player);
     const std::shared_ptr<std::stack<Player>> getPlayerStack();
-    const short getPlayerScore(Player player);
-    const std::map<Player, unsigned short>& getPlayerScoreMap();
+    PlayerScore getPlayerScore();
     void setShouldShowMoveTip();
     bool getShouldShowMoveTip();
     bool getIsGameRun();

@@ -173,7 +173,7 @@ void OthelloLayer::onExit() {
 void OthelloLayer::update(float delta) {
     if (!Singleton<Othello>::getInstance()->getIsGameRun()) {
         log("Game Did Finish!");
-        auto scene = GameFinishLayer::createScene(Singleton<Othello>::getInstance()->getPlayerScoreMap());
+        auto scene = GameFinishLayer::createScene(Singleton<Othello>::getInstance()->getPlayerScore());
         Director::getInstance()->pushScene(scene);
     }
 	auto currentBoardState = Singleton<Othello>::getInstance()->getBoard()->getBoardState();
@@ -195,8 +195,8 @@ void OthelloLayer::update(float delta) {
                 }
             }
         }
-        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore(Player::BlackPlayer)));
-        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore(Player::WhitePlayer)));
+        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::BlackPlayer]));
+        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::WhitePlayer]));
         if (Singleton<Othello>::getInstance()->getShouldShowMoveTip()) {
             log("Showing move tip ...");
             auto currentPlayer = Singleton<Othello>::getInstance()->getCurrentPlayer();

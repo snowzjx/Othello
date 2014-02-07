@@ -17,21 +17,21 @@ Board::Board() {
     (*boardState)[BOARD_WIDTH / 2][BOARD_HEIGHT / 2 - 1] = Player::WhitePlayer;
     (*boardState)[BOARD_WIDTH / 2 - 1][BOARD_HEIGHT / 2] = Player::WhitePlayer;
     this->_boardStateStack.push(boardState);
-    this->_playerScoreMap[Player::BlackPlayer] = 2;
-    this->_playerScoreMap[Player::WhitePlayer] = 2;
+    this->_playerScoreStack.push(PlayerScore(2, 2));
 }
 
 std::shared_ptr<Matrix<short>> Board::getBoardState() {
     return this->_boardStateStack.top();
 }
 
-bool Board::popOneBoardState() {
+bool Board::tackBackOneMove() {
     auto boardState = this->_boardStateStack.top();
     this->_boardStateStack.pop();
     if (this->_boardStateStack.empty()) {
         this->_boardStateStack.push(boardState);
         return false;
     } else {
+        this->_playerScoreStack.pop();
         return true;
     }
 }
@@ -54,6 +54,7 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
         return false;
     }
     std::vector<std::pair<unsigned short, unsigned short>> path;
+    PlayerScore playerScore(this->getPlayerScore());
     bool moveValid = false;
     for (auto itr = std::begin(searchDirections); itr != std::end(searchDirections); ++itr) {
         auto direction = *itr;
@@ -61,8 +62,8 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
         short searchY = y + std::get<1>(direction);
         while (searchX >=0 && searchX <= BOARD_WIDTH - 1 && searchY >=0 && searchY <= BOARD_HEIGHT - 1){
             if ((*boardState)[searchX][searchY] == player) {
-                this->_playerScoreMap[player] += path.size();
-                this->_playerScoreMap[PlayerUtil::swapPlayer(player)] -= path.size();
+                playerScore[player] += path.size();
+                playerScore[PlayerUtil::swapPlayer(player)] -= path.size();
                 for (auto pathItr = std::begin(path); pathItr != std::end(path); ++pathItr) {
                     (*boardState)[std::get<0>(*pathItr)][std::get<1>(*pathItr)] = player;
                 }
@@ -80,17 +81,14 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
         path.clear();
     }
     if (moveValid) {
-        this->_playerScoreMap[player] ++;
+        playerScore[player] ++;
         (*boardState)[x][y] = player;
 		this->_boardStateStack.push(boardState);
+        this->_playerScoreStack.push(playerScore);
     }
     return moveValid;
 }
 
-unsigned short Board::getPlayerScore(Player player) {
-    return this->_playerScoreMap[player];
-}
-
-const std::map<Player,unsigned short>& Board::getPlayerScoreMap() {
-    return this->_playerScoreMap;
+const PlayerScore Board::getPlayerScore() {
+    return this->_playerScoreStack.top();
 }

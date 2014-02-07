@@ -43,12 +43,8 @@ const std::shared_ptr<std::stack<Player>> Othello::getPlayerStack() {
     return this->_playStack;
 }
 
-const short Othello::getPlayerScore(Player player) {
-    return this->_board->getPlayerScore(player);
-}
-
-const std::map<Player, unsigned short>& Othello::getPlayerScoreMap() {
-    return this->_board->getPlayerScoreMap();
+PlayerScore Othello::getPlayerScore() {
+    return this->_board->getPlayerScore();
 }
 
 void Othello::setShouldShowMoveTip() {

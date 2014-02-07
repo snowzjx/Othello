@@ -65,7 +65,7 @@ bool PlayerEngine::respondToUndoAction() {
         if (playStack->size() > 2) {
             playStack->pop();
             if (playStack->top() == this->_player) {
-                Singleton<Othello>::getInstance()->getBoard()->popOneBoardState();
+                Singleton<Othello>::getInstance()->getBoard()->tackBackOneMove();
             } else {
                 if (Singleton<Othello>::getInstance()->getEngine(PlayerUtil::swapPlayer(this->_player))->getComfirmUndoValue()) {
                     short count = 0;
@@ -74,7 +74,7 @@ bool PlayerEngine::respondToUndoAction() {
                         count++;
                     }
                     for (short i = 0; i <= count; i++) {
-                        Singleton<Othello>::getInstance()->getBoard()->popOneBoardState();
+                        Singleton<Othello>::getInstance()->getBoard()->tackBackOneMove();
                     }
                 } else {
                     playStack->push(this->_player);
