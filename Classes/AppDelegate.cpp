@@ -22,7 +22,7 @@ AppDelegate::AppDelegate() {
 }
 
 AppDelegate::~AppDelegate() {
-    
+    Singleton<Othello>::destroyInstance();
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {

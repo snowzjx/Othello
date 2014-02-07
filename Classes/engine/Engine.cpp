@@ -13,7 +13,3 @@
 void Engine::setPlayer(Player player) {
     this->_player = player;
 }
-
-void Engine::setOthello(std::shared_ptr<Othello> othello) {
-    this->_othello = othello;
-}

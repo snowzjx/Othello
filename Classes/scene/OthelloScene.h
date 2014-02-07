@@ -26,6 +26,8 @@
 
 class OthelloLayer: public cocos2d::LayerColor{
 public:
+    OthelloLayer();
+    ~OthelloLayer();
     static cocos2d::Scene* createScene(GameMode gameMode);
     static OthelloLayer* create(GameMode gameMode);
     virtual bool init(GameMode gameMode);
@@ -51,15 +53,15 @@ private:
     void setLongPress(float delta);
     
 private:
-    std::shared_ptr<Othello> _othello = std::shared_ptr<Othello>(Singleton<Othello>::getInstance());
     std::shared_ptr<Matrix<short>> _storedBoardState = nullptr;
     std::set<std::shared_ptr<ActionResponder>> _actionResponderSet;
     cocos2d::SpriteBatchNode* _piecesBatchNode;
-    std::vector<PieceSprite*> _pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
+    std::vector<PieceSprite*> _pieceSpriteVector;
     std::vector<cocos2d::Sprite*> _moveTipSpriteVector;
     std::map<Player, cocos2d::LabelTTF*> _userScoreMap;
-    cocos2d::EventListenerTouchOneByOne* listener;
+    cocos2d::EventListenerTouchOneByOne* _listener;
     bool _isLongPress = false;
+    GameMode _gameMode;
 };
 
 #endif

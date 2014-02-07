@@ -19,6 +19,15 @@
 
 USING_NS_CC;
 
+OthelloLayer::OthelloLayer() {
+    
+}
+
+OthelloLayer::~OthelloLayer() {
+    log("~OthelloLayer ...");
+    CC_SAFE_DELETE(this->_piecesBatchNode);
+}
+
 Scene* OthelloLayer::createScene(GameMode gameMode) {
     auto scene = Scene::create();
     auto layer = OthelloLayer::create(gameMode);
@@ -42,6 +51,11 @@ bool OthelloLayer::init(GameMode gameMode) {
     if (!LayerColor::initWithColor(BACKGROUND_COLOR)) {
         return false;
     }
+    
+    this->_gameMode = gameMode;
+
+    this->_pieceSpriteVector = std::vector<PieceSprite*>(BOARD_WIDTH * BOARD_HEIGHT);
+    
     Size winSize = Director::getInstance()->getWinSize();
     
     this->_piecesBatchNode = SpriteBatchNode::create("othelloscene.pvr.ccz");
@@ -72,8 +86,6 @@ bool OthelloLayer::init(GameMode gameMode) {
     this->addChild(blackPlayerScore, noticeZOrder + 1);
     this->addChild(whitePlayerScore, noticeZOrder + 1);
     
-    this->setGameMode(gameMode);
-    
     this->scheduleUpdate();
     return true;
 }
@@ -101,8 +113,8 @@ void OthelloLayer::setGameMode(GameMode gameMode) {
         default:
             break;
     }
-    this->_othello->setEngine(Player::BlackPlayer, bEngine);
-    this->_othello->setEngine(Player::WhitePlayer, wEngine);
+    Singleton<Othello>::getInstance()->setEngine(Player::BlackPlayer, bEngine);
+    Singleton<Othello>::getInstance()->setEngine(Player::WhitePlayer, wEngine);
 }
 
 std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
@@ -113,15 +125,15 @@ std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
 
 void OthelloLayer::onEnter() {
     Layer::onEnter();
-    this->listener = EventListenerTouchOneByOne::create();
-    this->listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
+    this->_listener = EventListenerTouchOneByOne::create();
+    this->_listener->onTouchBegan = [&](Touch* touch, Event* event) -> bool {
         this->scheduleOnce(schedule_selector(OthelloLayer::setLongPress), 0.3);
         return true;
     };
-    this->listener->onTouchMoved = [&](Touch* touch, Event* event) {
+    this->_listener->onTouchMoved = [&](Touch* touch, Event* event) {
         this->unschedule(schedule_selector(OthelloLayer::setLongPress));
     };
-    this->listener->onTouchEnded = [&](Touch* touch, Event* event) {
+    this->_listener->onTouchEnded = [&](Touch* touch, Event* event) {
         this->unschedule(schedule_selector(OthelloLayer::setLongPress));
         if (this->_isLongPress) {
             log("Long press event.");
@@ -141,25 +153,28 @@ void OthelloLayer::onEnter() {
             }
         }
     };
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->listener, this);
-    this->_othello->startOthello();
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(this->_listener, this);
+    this->setGameMode(this->_gameMode);
+    Singleton<Othello>::getInstance()->startOthello();
 }
 
 void OthelloLayer::onExit() {
     Layer::onExit();
-	this->_eventDispatcher->removeEventListener(this->listener);
+	this->_eventDispatcher->removeEventListener(this->_listener);
+    Singleton<Othello>::getInstance()->endOthello();
+    this->_actionResponderSet.clear();
 }
 
 void OthelloLayer::update(float delta) {
-    if (!this->_othello->getIsGameRun()) {
+    if (!Singleton<Othello>::getInstance()->getIsGameRun()) {
         log("Game Did Finish!");
-        auto scene = GameFinishLayer::createScene(this->_othello->getPlayerScoreMap());
+        auto scene = GameFinishLayer::createScene(Singleton<Othello>::getInstance()->getPlayerScoreMap());
         Director::getInstance()->pushScene(scene);
     }
-	auto currentBoardState = this->_othello->getBoard()->getBoardState();
+	auto currentBoardState = Singleton<Othello>::getInstance()->getBoard()->getBoardState();
 	if (this->_storedBoardState == nullptr || this->_storedBoardState != currentBoardState) {
 		log("Othello board is updating ...");
-        log("Waiting for player: %d", this->_othello->getCurrentPlayer());
+        log("Waiting for player: %d", Singleton<Othello>::getInstance()->getCurrentPlayer());
         for (short i = 0; i < BOARD_WIDTH; i ++) {
             for (short j = 0; j < BOARD_HEIGHT; j++) {
                 auto deltaValue = (*currentBoardState)[i][j] - (this->_storedBoardState == nullptr ? 0 : (*this->_storedBoardState)[i][j]);
@@ -175,12 +190,12 @@ void OthelloLayer::update(float delta) {
                 }
             }
         }
-        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::BlackPlayer)));
-        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(this->_othello->getPlayerScore(Player::WhitePlayer)));
-        if (this->_othello->getShouldShowMoveTip()) {
+        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore(Player::BlackPlayer)));
+        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore(Player::WhitePlayer)));
+        if (Singleton<Othello>::getInstance()->getShouldShowMoveTip()) {
             log("Showing move tip ...");
-            auto currentPlayer = this->_othello->getCurrentPlayer();
-            auto availPos = this->_othello->getPlayerAvailPos(currentPlayer);
+            auto currentPlayer = Singleton<Othello>::getInstance()->getCurrentPlayer();
+            auto availPos = Singleton<Othello>::getInstance()->getPlayerAvailPos(currentPlayer);
             if (availPos.size() > 0) {
                 this->clearMoveTip();
                 for (auto itr = std::begin(availPos); itr != std::end(availPos); ++itr) {
@@ -258,7 +273,7 @@ void OthelloLayer::popupUndoLayer() {
     titleLabel->setColor(FOREGROUND_COLOR);
     popupLayer->setTitle(titleLabel);
     
-    std::string player = PlayerUtil::swapPlayer(this->_othello->getCurrentPlayer()) == Player::BlackPlayer ? "black" : "white";
+    std::string player = PlayerUtil::swapPlayer(Singleton<Othello>::getInstance()->getCurrentPlayer()) == Player::BlackPlayer ? "black" : "white";
     std::string infoStr = "The " + player + " player wants to take back his previous move, do you agree ?";
     auto contextLabel = LabelTTF::create(infoStr, "Helvetica.ttf", 8, Size(150, 0), TextHAlignment::LEFT);
     contextLabel->setColor(Color3B::BLACK);

@@ -15,11 +15,11 @@ Othello::Othello() {
 	this->_isGameShouldRun = false;
     this->_playStack = std::shared_ptr<std::stack<Player>>(new std::stack<Player>());
     this->_showMoveTip = false;
+    this->_othelloThread = nullptr;
 }
 
 void Othello::setEngine(Player player, std::shared_ptr<Engine> enginePtr) {
     enginePtr->setPlayer(player);
-    enginePtr->setOthello(this->shared_from_this());
     this->_playerEngineMap[player] = enginePtr;
 }
 
@@ -74,8 +74,11 @@ void Othello::startOthello() {
 
 void Othello::endOthello() {
 	this->_isGameShouldRun = false;
-	this->_playerEngineMap[Player::BlackPlayer]->stop();
-	this->_playerEngineMap[Player::WhitePlayer]->stop();
+    if(this->_playerEngineMap.size() > 0) {
+        this->_playerEngineMap[Player::BlackPlayer]->stop();
+        this->_playerEngineMap[Player::WhitePlayer]->stop();
+        this->_playerEngineMap.clear();
+    }
 }
 
 void Othello::updateAvailPos(Player player) {
@@ -141,7 +144,7 @@ void Othello::othelloThreadStart() {
 }
 
 Othello::~Othello() {
-	this->endOthello();
+    this->endOthello();
     if (this->_othelloThread && this->_othelloThread->joinable()) {
 		this->_othelloThread->join();
         delete _othelloThread;

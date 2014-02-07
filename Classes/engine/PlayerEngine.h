@@ -25,6 +25,8 @@ private:
     bool _isComfirmUndo;
     
 public:
+    PlayerEngine();
+    ~PlayerEngine();
     virtual std::function<bool()> getNextAction() override;
     virtual bool getComfirmUndoValue() override;
     virtual bool respondToMoveAction(unsigned short posX, unsigned short posY) override;

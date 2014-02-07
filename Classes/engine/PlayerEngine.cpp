@@ -11,7 +11,16 @@
 #include <thread>
 #include <cstdlib>
 #include "../game/Othello.h"
+#include "../util/Singleton.h"
 #include "../util/PlayerUtil.h"
+
+PlayerEngine::PlayerEngine() {
+    
+}
+
+PlayerEngine::~PlayerEngine() {
+    
+}
 
 std::function<bool()> PlayerEngine::getNextAction() {
     this->_status = ActionResponderStatus::WAITING_FOR_CONTROL_ACTION;
@@ -40,7 +49,7 @@ bool PlayerEngine::respondToMoveAction(unsigned short posX, unsigned short posY)
         return false;
     }
     this->_action = [this, posX, posY]() -> bool {
-        return this->_othello.lock()->getBoard()->move(this->_player, posX, posY);
+        return Singleton<Othello>::getInstance()->getBoard()->move(this->_player, posX, posY);
     };
     this->_isActionValueSet = true;
     this->_condVar.notify_all();
@@ -52,20 +61,20 @@ bool PlayerEngine::respondToUndoAction() {
         return false;
     }
     this->_action = [this]() -> bool {
-        auto playStack = this->_othello.lock()->getPlayerStack();
+        auto playStack = Singleton<Othello>::getInstance()->getPlayerStack();
         if (playStack->size() > 2) {
             playStack->pop();
             if (playStack->top() == this->_player) {
-                this->_othello.lock()->getBoard()->popOneBoardState();
+                Singleton<Othello>::getInstance()->getBoard()->popOneBoardState();
             } else {
-                if (this->_othello.lock()->getEngine(PlayerUtil::swapPlayer(this->_player))->getComfirmUndoValue()) {
+                if (Singleton<Othello>::getInstance()->getEngine(PlayerUtil::swapPlayer(this->_player))->getComfirmUndoValue()) {
                     short count = 0;
                     while (playStack->top() != this->_player) {
                         playStack->pop();
                         count++;
                     }
                     for (short i = 0; i <= count; i++) {
-                        this->_othello.lock()->getBoard()->popOneBoardState();
+                        Singleton<Othello>::getInstance()->getBoard()->popOneBoardState();
                     }
                 } else {
                     playStack->push(this->_player);

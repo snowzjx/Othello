@@ -59,7 +59,7 @@ void MenuLayer::onePlayerCallBack(cocos2d::Object *pSender) {
 }
 
 void MenuLayer::twoPlayerCallBack(cocos2d::Object *pSender) {
-    auto scene = OthelloLayer::createScene(GameMode::aiVsAi);
+    auto scene = OthelloLayer::createScene(GameMode::humanVsHuman);
     Director::getInstance()->pushScene(scene);
 
 }
