@@ -43,6 +43,9 @@ private:
     void undoCancelCallBack(cocos2d::Object* pSender);
     void popupToolLayer(cocos2d::Point pos);
     void hideToolLayer(cocos2d::Object* pSender);
+    void pauseCallBack(cocos2d::Object* pSender);
+    void pauseAbortCallBack(cocos2d::Object* pSender);
+    void pauseResumeCallBack(cocos2d::Object* pSender);
     void popupUndoLayer();
     void hidePopupUndoLayer();
     void createPieceAt(short i, short j, PieceSpriteStatus status );

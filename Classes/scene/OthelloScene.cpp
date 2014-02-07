@@ -83,6 +83,14 @@ bool OthelloLayer::init(GameMode gameMode) {
     this->addChild(blackPlayerScore, noticeZOrder + 1);
     this->addChild(whitePlayerScore, noticeZOrder + 1);
     
+    auto menu = Menu::create();
+    menu->setPosition(winSize.width - 10, winSize.height - 10);
+    this->addChild(menu, noticeZOrder);
+    
+    auto pauseBtnSprite = Sprite::createWithSpriteFrameName("PauseButton.png");
+    auto pauseBtn = MenuItemSprite::create(pauseBtnSprite, pauseBtnSprite, CC_CALLBACK_1(OthelloLayer::pauseCallBack, this));
+    menu->addChild(pauseBtn);
+    
     this->setGameMode(gameMode);
     
     this->scheduleUpdate();
@@ -160,7 +168,6 @@ void OthelloLayer::onExit() {
     Layer::onExit();
 	this->_eventDispatcher->removeEventListener(this->_listener);
     Singleton<Othello>::getInstance()->endOthello();
-    this->_actionResponderSet.clear();
 }
 
 void OthelloLayer::update(float delta) {
@@ -238,8 +245,39 @@ void OthelloLayer::undoCancelCallBack(cocos2d::Object *pSender) {
     }
 }
 
+void OthelloLayer::pauseCallBack(cocos2d::Object *pSender) {
+    auto size = Director::getInstance()->getWinSize();
+    auto popupLayer = PopupLayer::create();
+    popupLayer->setBackgroundImage("PopupBG.png");
+    popupLayer->setPosition(size.width / 2, size.height / 2);
+    auto titleLabel = LabelTTF::create("Game Pause", "Helvetica.ttf", 14);
+    titleLabel->setColor(FOREGROUND_COLOR);
+    popupLayer->setTitle(titleLabel);
+    
+    auto resumeLabel = LabelTTF::create("Resume", "Helvetica.ttf", 10);
+    resumeLabel->setColor(FOREGROUND_COLOR);
+    auto resumeItem = MenuItemLabel::create(resumeLabel, CC_CALLBACK_1(OthelloLayer::pauseResumeCallBack, this));
+    popupLayer->addMenuItem(resumeItem, Point(-45, -42));
+    
+    auto abortLabel = LabelTTF::create("Abort", "Helvetica.ttf", 10);
+    abortLabel->setColor(FOREGROUND_COLOR);
+    auto abortItem = MenuItemLabel::create(abortLabel, CC_CALLBACK_1(OthelloLayer::pauseAbortCallBack, this));
+    popupLayer->addMenuItem(abortItem, Point(45, -42));
+    
+    this->addChild(popupLayer, popupZOrder, pausePopupTag);
+}
+
+void OthelloLayer::pauseResumeCallBack(cocos2d::Object *pSender) {
+    this->removeChildByTag(pausePopupTag);
+}
+
+void OthelloLayer::pauseAbortCallBack(cocos2d::Object *pSender) {
+    this->removeChildByTag(pausePopupTag);
+    Singleton<Othello>::getInstance()->endOthello();
+}
+
 void OthelloLayer::popupToolLayer(cocos2d::Point pos) {
-    PopupLayer *popupLayer = PopupLayer::create();
+    auto popupLayer = PopupLayer::create();
     popupLayer->setBackgroundImage("TackBackPopupBG.png");
     popupLayer->setPosition(Point(pos));
     
@@ -254,7 +292,6 @@ void OthelloLayer::popupToolLayer(cocos2d::Point pos) {
     popupLayer->addMenuItem(cancelItem, Point(30, 4));
     
     this->addChild(popupLayer, popupZOrder, toolPopupTag);
-
 }
 
 void OthelloLayer::hideToolLayer(cocos2d::Object *pSender) {
@@ -263,7 +300,7 @@ void OthelloLayer::hideToolLayer(cocos2d::Object *pSender) {
 
 void OthelloLayer::popupUndoLayer() {
     Size winSize = Director::getInstance()->getWinSize();
-    PopupLayer *popupLayer = PopupLayer::create();
+    auto popupLayer = PopupLayer::create();
     popupLayer->setBackgroundImage("PopupBG.png");
     popupLayer->setPosition(Point(winSize.width / 2, winSize.height / 2));
     

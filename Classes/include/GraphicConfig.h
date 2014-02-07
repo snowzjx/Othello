@@ -20,7 +20,8 @@ static const float boardDeltaGap = boardEdge * 10.0 / 1150.0;
 static const int pieceZOrder = 5;
 static const int noticeZOrder = 10;
 static const int popupZOrder = 15;
-static const int undoPopupTag = 1;
-static const int toolPopupTag = 2;
+static const int undoPopupTag = 101;
+static const int toolPopupTag = 102;
+static const int pausePopupTag = 103;
 
 #endif
