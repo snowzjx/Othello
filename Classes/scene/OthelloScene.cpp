@@ -14,6 +14,7 @@
 #include "../util/PointUtil.h"
 #include "../util/AnimationUtil.h"
 #include "../util/PlayerUtil.h"
+#include "../util/StringPatch.h"
 #include "PopupLayer.h"
 #include "GameFinishScene.h"
 
@@ -195,8 +196,8 @@ void OthelloLayer::update(float delta) {
                 }
             }
         }
-        this->_userScoreMap[Player::BlackPlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::BlackPlayer]));
-        this->_userScoreMap[Player::WhitePlayer]->setString(std::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::WhitePlayer]));
+        this->_userScoreMap[Player::BlackPlayer]->setString(string_patch::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::BlackPlayer]));
+        this->_userScoreMap[Player::WhitePlayer]->setString(string_patch::to_string(Singleton<Othello>::getInstance()->getPlayerScore()[Player::WhitePlayer]));
         if (Singleton<Othello>::getInstance()->getShouldShowMoveTip()) {
             log("Showing move tip ...");
             auto currentPlayer = Singleton<Othello>::getInstance()->getCurrentPlayer();
