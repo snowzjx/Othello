@@ -72,6 +72,12 @@
     <ClCompile Include="..\Classes\sprite\PieceSprite.cpp">
       <Filter>Classes\sprite</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\core\Move.cpp">
+      <Filter>Classes\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\core\PlayerScoreInfo.cpp">
+      <Filter>Classes\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -96,9 +102,6 @@
       <Filter>Classes\core</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\core\Player.h">
-      <Filter>Classes\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\core\PlayerScore.h">
       <Filter>Classes\core</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\engine\AIEngine.h">
@@ -151,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\util\StringPatch.h">
       <Filter>Classes\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\PlayerScoreInfo.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\Move.h">
+      <Filter>Classes\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

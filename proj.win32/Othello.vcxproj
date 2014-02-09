@@ -137,6 +137,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\core\Board.cpp" />
+    <ClCompile Include="..\Classes\core\Move.cpp" />
+    <ClCompile Include="..\Classes\core\PlayerScoreInfo.cpp" />
     <ClCompile Include="..\Classes\engine\AIEngine.cpp" />
     <ClCompile Include="..\Classes\engine\Engine.cpp" />
     <ClCompile Include="..\Classes\engine\PlayerEngine.cpp" />
@@ -155,8 +157,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\core\Board.h" />
     <ClInclude Include="..\Classes\core\Matrix.h" />
     <ClInclude Include="..\Classes\core\MatrixData.h" />
+    <ClInclude Include="..\Classes\core\Move.h" />
     <ClInclude Include="..\Classes\core\Player.h" />
-    <ClInclude Include="..\Classes\core\PlayerScore.h" />
+    <ClInclude Include="..\Classes\core\PlayerScoreInfo.h" />
     <ClInclude Include="..\Classes\engine\AIEngine.h" />
     <ClInclude Include="..\Classes\engine\Engine.h" />
     <ClInclude Include="..\Classes\engine\PlayerEngine.h" />
