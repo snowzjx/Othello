@@ -11,6 +11,7 @@
 
 enum Player {
     BlackPlayer = 1,
+    NoPlayer = 0,
     WhitePlayer = -1
 };
 

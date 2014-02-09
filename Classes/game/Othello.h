@@ -21,33 +21,29 @@
 class Othello final {
 private:
     std::atomic_bool _isGameShouldRun;
+    Player _currentPlayer;
     std::shared_ptr<Board> _board;
     std::map<Player, std::shared_ptr<Engine>> _playerEngineMap;
-    std::map<Player, std::vector<std::pair<unsigned short, unsigned short>>> _playAvailPosMap;
-    std::shared_ptr<std::stack<Player>> _playStack;
     std::thread* _othelloThread;
     bool _showMoveTip;
     
 private:
-    void updateAvailPos(Player player);
     void nextPlayer();
     void othelloThreadStart();
 
 public:
     Othello();
-    void setEngine(Player player, std::shared_ptr<Engine> enginePtr);
-    const Player getCurrentPlayer();
-    const std::shared_ptr<Engine> getEngine(Player player);
-    const std::shared_ptr<Board> getBoard();
-    const std::vector<std::pair<unsigned short, unsigned short>>& getPlayerAvailPos(Player player);
-    const std::shared_ptr<std::stack<Player>> getPlayerStack();
-    PlayerScore getPlayerScore();
-    void setShouldShowMoveTip();
-    bool getShouldShowMoveTip();
+    ~Othello();
     bool getIsGameRun();
     void startOthello();
     void endOthello();
-	~Othello();
+    void setEngine(Player player, std::shared_ptr<Engine> enginePtr);
+    const std::shared_ptr<Engine> getEngine(Player player);
+    const Player getCurrentPlayer();
+    const std::shared_ptr<Board> getBoard();
+    PlayerScoreMap getPlayerScore();
+    void setShouldShowMoveTip();
+    bool getShouldShowMoveTip();
 };
 
 #endif

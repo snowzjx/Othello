@@ -201,7 +201,7 @@ void OthelloLayer::update(float delta) {
         if (Singleton<Othello>::getInstance()->getShouldShowMoveTip()) {
             log("Showing move tip ...");
             auto currentPlayer = Singleton<Othello>::getInstance()->getCurrentPlayer();
-            auto availPos = Singleton<Othello>::getInstance()->getPlayerAvailPos(currentPlayer);
+            auto availPos = Singleton<Othello>::getInstance()->getBoard()->getAvailPos(currentPlayer);
             if (availPos.size() > 0) {
                 this->clearMoveTip();
                 for (auto itr = std::begin(availPos); itr != std::end(availPos); ++itr) {
@@ -313,7 +313,7 @@ void OthelloLayer::popupUndoLayer() {
     titleLabel->setColor(FOREGROUND_COLOR);
     popupLayer->setTitle(titleLabel);
     
-    std::string player = PlayerUtil::swapPlayer(Singleton<Othello>::getInstance()->getCurrentPlayer()) == Player::BlackPlayer ? "black" : "white";
+    std::string player = Singleton<Othello>::getInstance()->getCurrentPlayer() == Player::BlackPlayer ? "black" : "white";
     std::string infoStr = "The " + player + " player wants to take back his previous move, do you agree ?";
     auto contextLabel = LabelTTF::create(infoStr, "Helvetica.ttf", 8, Size(150, 0), TextHAlignment::LEFT);
     contextLabel->setColor(Color3B::BLACK);

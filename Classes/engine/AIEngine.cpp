@@ -23,7 +23,7 @@ AIEngine::~AIEngine() {
 
 std::function<bool()> AIEngine::getNextAction() {
     return [&]() -> bool {
-        auto availPos = Singleton<Othello>::getInstance()->getPlayerAvailPos(this->_player);
+        auto availPos = Singleton<Othello>::getInstance()->getBoard()->getAvailPos(this->_player);
         int size = availPos.size();
         short index = rand() % size;
         auto pos = availPos[index];

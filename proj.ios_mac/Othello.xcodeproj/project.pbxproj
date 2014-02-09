@@ -60,6 +60,10 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		8009DDA018A798F600A3DD5E /* PlayerScoreMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8009DD9F18A798F600A3DD5E /* PlayerScoreMap.cpp */; };
+		8009DDA118A798F600A3DD5E /* PlayerScoreMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8009DD9F18A798F600A3DD5E /* PlayerScoreMap.cpp */; };
+		8009DDA418A7A36600A3DD5E /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8009DDA318A7A36600A3DD5E /* Move.cpp */; };
+		8009DDA518A7A36600A3DD5E /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8009DDA318A7A36600A3DD5E /* Move.cpp */; };
 		800CBD8A189BA4D0001875CD /* fromWhiteToBlack.plist in Resources */ = {isa = PBXBuildFile; fileRef = 800CBD89189BA4D0001875CD /* fromWhiteToBlack.plist */; };
 		80209912189913EB00AE9C54 /* PieceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 808F6CD81898FA8300877E51 /* PieceSprite.cpp */; };
 		8020991C1899438400AE9C54 /* fromBlackToWhite.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8020991B1899438400AE9C54 /* fromBlackToWhite.plist */; };
@@ -316,6 +320,9 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		8009DD9F18A798F600A3DD5E /* PlayerScoreMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerScoreMap.cpp; sourceTree = "<group>"; };
+		8009DDA218A79E0100A3DD5E /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
+		8009DDA318A7A36600A3DD5E /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Move.cpp; sourceTree = "<group>"; };
 		800CBD89189BA4D0001875CD /* fromWhiteToBlack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fromWhiteToBlack.plist; path = animation/fromWhiteToBlack.plist; sourceTree = "<group>"; };
 		800DD88B18A113F800A9B172 /* FinishScene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FinishScene; sourceTree = "<group>"; };
 		8020991918991D6000AE9C54 /* PointUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointUtil.h; sourceTree = "<group>"; };
@@ -336,7 +343,7 @@
 		808F6CD81898FA8300877E51 /* PieceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PieceSprite.cpp; path = ../Classes/sprite/PieceSprite.cpp; sourceTree = "<group>"; };
 		808F6CDB1898FACC00877E51 /* PieceSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSprite.h; path = ../Classes/sprite/PieceSprite.h; sourceTree = "<group>"; };
 		808F6CDC1898FACC00877E51 /* PieceSpriteStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSpriteStatus.h; path = ../Classes/sprite/PieceSpriteStatus.h; sourceTree = "<group>"; };
-		80A5CCFC18A4F2A30056AAD4 /* PlayerScore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerScore.h; sourceTree = "<group>"; };
+		80A5CCFC18A4F2A30056AAD4 /* PlayerScoreMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerScoreMap.h; sourceTree = "<group>"; };
 		80AF5B4F189F8A6200BE9CA2 /* MenuScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/scene/MenuScene.h; sourceTree = "<group>"; };
 		80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/scene/MenuScene.cpp; sourceTree = "<group>"; };
 		80AF5B5A189F8E9300BE9CA2 /* MenuScene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MenuScene; sourceTree = "<group>"; };
@@ -632,10 +639,13 @@
 			children = (
 				80C2932D188BF225008E7989 /* Board.h */,
 				80C2932C188BF225008E7989 /* Board.cpp */,
+				8009DDA218A79E0100A3DD5E /* Move.h */,
+				8009DDA318A7A36600A3DD5E /* Move.cpp */,
 				80C2932E188BF225008E7989 /* Matrix.h */,
 				80C2932F188BF225008E7989 /* MatrixData.h */,
 				80C29330188BF225008E7989 /* Player.h */,
-				80A5CCFC18A4F2A30056AAD4 /* PlayerScore.h */,
+				80A5CCFC18A4F2A30056AAD4 /* PlayerScoreMap.h */,
+				8009DD9F18A798F600A3DD5E /* PlayerScoreMap.cpp */,
 			);
 			name = core;
 			path = ../Classes/core;
@@ -955,11 +965,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8009DDA418A7A36600A3DD5E /* Move.cpp in Sources */,
 				803F9003188FBCBB00C7B0F6 /* Engine.cpp in Sources */,
 				80AF5B57189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */,
 				80C29331188BF225008E7989 /* Board.cpp in Sources */,
 				8053AA9318A2260D00D2B651 /* GameFinishScene.cpp in Sources */,
 				803F8FEB188FABB000C7B0F6 /* OthelloScene.cpp in Sources */,
+				8009DDA018A798F600A3DD5E /* PlayerScoreMap.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				80CE173E189CE9A9001CA2D6 /* PopupLayer.cpp in Sources */,
 				808F6CDA1898FA8300877E51 /* PieceSprite.cpp in Sources */,
@@ -983,6 +995,8 @@
 				803F901F188FDDE100C7B0F6 /* PlayerEngine.cpp in Sources */,
 				8053AA9418A2260D00D2B651 /* GameFinishScene.cpp in Sources */,
 				80209912189913EB00AE9C54 /* PieceSprite.cpp in Sources */,
+				8009DDA118A798F600A3DD5E /* PlayerScoreMap.cpp in Sources */,
+				8009DDA518A7A36600A3DD5E /* Move.cpp in Sources */,
 				803F8FEC188FABB000C7B0F6 /* OthelloScene.cpp in Sources */,
 				80CE173F189CE9A9001CA2D6 /* PopupLayer.cpp in Sources */,
 				803F9004188FBCBB00C7B0F6 /* Engine.cpp in Sources */,

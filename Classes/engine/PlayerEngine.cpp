@@ -61,23 +61,15 @@ bool PlayerEngine::respondToUndoAction() {
         return false;
     }
     this->_action = [this]() -> bool {
-        auto playStack = Singleton<Othello>::getInstance()->getPlayerStack();
-        if (playStack->size() > 2) {
-            playStack->pop();
-            if (playStack->top() == this->_player) {
-                Singleton<Othello>::getInstance()->getBoard()->tackBackOneMove();
+        auto board = Singleton<Othello>::getInstance()->getBoard();
+        if (board->canTackBackOneMove()) {
+            if (board->getPreviousMove().player == this->_player) {
+                board->tackBackOneMove();
             } else {
                 if (Singleton<Othello>::getInstance()->getEngine(PlayerUtil::swapPlayer(this->_player))->getComfirmUndoValue()) {
-                    short count = 0;
-                    while (playStack->top() != this->_player) {
-                        playStack->pop();
-                        count++;
-                    }
-                    for (short i = 0; i <= count; i++) {
-                        Singleton<Othello>::getInstance()->getBoard()->tackBackOneMove();
-                    }
-                } else {
-                    playStack->push(this->_player);
+                    do {
+                        board->tackBackOneMove();
+                    } while (board->canTackBackOneMove() && board->getPreviousMove().player == this->_player);
                 }
             }
         }

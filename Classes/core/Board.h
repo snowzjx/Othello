@@ -15,23 +15,30 @@
 #include <memory>
 #include "Matrix.h"
 #include "Player.h"
-#include "PlayerScore.h"
+#include "Move.h"
+#include "PlayerScoreMap.h"
 
 static const unsigned short BOARD_WIDTH = 8;
 static const unsigned short BOARD_HEIGHT = 8;
 static const std::vector<std::pair<short, short>> DIRECTIONS = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,1},{-1,1},{1,-1}};
-static const unsigned short NO_PLAYER = 0;
 
 class Board final {
 private:
     std::stack<std::shared_ptr<Matrix<short>>> _boardStateStack;
-    std::stack<PlayerScore> _playerScoreStack;
+    std::stack<PlayerScoreMap> _playerScoreMapStack;
+    std::stack<Move> _moveStack;
+    std::map<Player, std::vector<std::pair<unsigned short, unsigned short>>> _cachedAvailPosMap;
 public:
     Board();
+    ~Board();
     std::shared_ptr<Matrix<short>> getBoardState();
-    bool tackBackOneMove();
+    bool move(Move move);
     bool move(Player player, unsigned short x, unsigned short y);
-    const PlayerScore getPlayerScore();
+    Move getPreviousMove();
+    bool tackBackOneMove();
+    bool canTackBackOneMove();
+    std::vector<std::pair<unsigned short, unsigned short>> getAvailPos(Player player);
+    const PlayerScoreMap getPlayerScoreMap();
 };
 
 #endif

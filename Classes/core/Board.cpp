@@ -17,7 +17,11 @@ Board::Board() {
     (*boardState)[BOARD_WIDTH / 2][BOARD_HEIGHT / 2 - 1] = Player::WhitePlayer;
     (*boardState)[BOARD_WIDTH / 2 - 1][BOARD_HEIGHT / 2] = Player::WhitePlayer;
     this->_boardStateStack.push(boardState);
-    this->_playerScoreStack.push(PlayerScore(2, 2));
+    this->_playerScoreMapStack.push(PlayerScoreMap(2, 2));
+}
+
+Board::~Board() {
+    
 }
 
 std::shared_ptr<Matrix<short>> Board::getBoardState() {
@@ -25,20 +29,30 @@ std::shared_ptr<Matrix<short>> Board::getBoardState() {
 }
 
 bool Board::tackBackOneMove() {
-    auto boardState = this->_boardStateStack.top();
-    this->_boardStateStack.pop();
-    if (this->_boardStateStack.empty()) {
-        this->_boardStateStack.push(boardState);
-        return false;
-    } else {
-        this->_playerScoreStack.pop();
+    if (this->_boardStateStack.size() > 1) {
+        this->_boardStateStack.pop();
+        this->_playerScoreMapStack.pop();
+        this->_moveStack.pop();
+        this->_cachedAvailPosMap.clear();
         return true;
+    } else {
+        return false;
     }
 }
 
+bool Board::canTackBackOneMove() {
+    return this->_moveStack.size() > 0;
+}
+
 bool Board::move(Player player, unsigned short x, unsigned short y) {
-    std::shared_ptr<Matrix<short>> boardState = this->_boardStateStack.top()->clone();
-    if (x < 0 || y < 0 || x > BOARD_WIDTH || y > BOARD_HEIGHT || (*boardState)[x][y] != NO_PLAYER) {
+    return this->move(Move(player, x, y));
+}
+
+bool Board::move(Move move) {
+    auto x = move.x;
+    auto y = move.y;
+    auto player = move.player;
+    if (x < 0 || y < 0 || x > BOARD_WIDTH || y > BOARD_HEIGHT || (*this->getBoardState())[x][y] != Player::NoPlayer) {
         return false;
     }
     std::vector<std::pair<short, short>> searchDirections;
@@ -46,15 +60,16 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
         auto direction = *itr;
         short searchX = x + std::get<0>(direction);
         short searchY = y + std::get<1>(direction);
-        if (searchX >=0 && searchX <= BOARD_WIDTH - 1 && searchY >=0 && searchY <= BOARD_HEIGHT - 1 && (*boardState)[searchX][searchY] == -player) {
+        if (searchX >=0 && searchX <= BOARD_WIDTH - 1 && searchY >=0 && searchY <= BOARD_HEIGHT - 1 && (*this->getBoardState())[searchX][searchY] == -player) {
             searchDirections.push_back(*itr);
         }
     }
     if(searchDirections.size() == 0) {
         return false;
     }
+    std::shared_ptr<Matrix<short>> boardState = this->_boardStateStack.top()->clone();
     std::vector<std::pair<unsigned short, unsigned short>> path;
-    PlayerScore playerScore(this->getPlayerScore());
+    PlayerScoreMap playerScore(this->getPlayerScoreMap());
     bool moveValid = false;
     for (auto itr = std::begin(searchDirections); itr != std::end(searchDirections); ++itr) {
         auto direction = *itr;
@@ -72,7 +87,7 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
             } else {
                 path.push_back({searchX, searchY});
             }
-            if ((*boardState)[searchX][searchY] == NO_PLAYER) {
+            if ((*boardState)[searchX][searchY] == Player::NoPlayer) {
                 break;
             }
             searchX += std::get<0>(direction);
@@ -81,14 +96,61 @@ bool Board::move(Player player, unsigned short x, unsigned short y) {
         path.clear();
     }
     if (moveValid) {
-        playerScore[player] ++;
         (*boardState)[x][y] = player;
+        playerScore[player] ++;
 		this->_boardStateStack.push(boardState);
-        this->_playerScoreStack.push(playerScore);
+        this->_playerScoreMapStack.push(playerScore);
+        this->_moveStack.push(move);
+        this->_cachedAvailPosMap.clear();
     }
     return moveValid;
 }
 
-const PlayerScore Board::getPlayerScore() {
-    return this->_playerScoreStack.top();
+Move Board::getPreviousMove() {
+    return this->_moveStack.top();
+}
+
+std::vector<std::pair<unsigned short, unsigned short>> Board::getAvailPos(Player player) {
+    auto itr = this->_cachedAvailPosMap.find(player);
+    if (itr != this->_cachedAvailPosMap.end()) {
+        return itr->second;
+    }
+    std::vector<std::pair<unsigned short, unsigned short>> availPos;
+    std::vector<std::pair<unsigned short, unsigned short>> enemyPos;
+    auto boardStatus = *this->getBoardState();
+    for (short i = 0; i < BOARD_WIDTH; i++) {
+        for (short j = 0; j < BOARD_HEIGHT; j++) {
+            if (boardStatus[i][j] == -player) {
+                enemyPos.push_back({i, j});
+            }
+        }
+    }
+    if (enemyPos.size() != 0) {
+        for (auto enemyPosItr = enemyPos.begin(); enemyPosItr != enemyPos.end(); enemyPosItr++) {
+            for (auto directionItr = DIRECTIONS.begin(); directionItr != DIRECTIONS.end(); directionItr++) {
+                short posX = std::get<0>(*enemyPosItr) + std::get<0>(*directionItr);
+                short posY = std::get<1>(*enemyPosItr) + std::get<1>(*directionItr);
+                if (posX >= 0 && posX <= BOARD_WIDTH - 1 && posY >= 0 && posY <= BOARD_HEIGHT - 1 && boardStatus[posX][posY] == Player::NoPlayer) {
+                    short searchX = posX - std::get<0>(*directionItr);
+                    short searchY = posY - std::get<1>(*directionItr);
+                    while (searchX >= 0 && searchX <= BOARD_WIDTH - 1 && searchY >= 0 && searchY <= BOARD_HEIGHT - 1) {
+                        if (boardStatus[searchX][searchY] == player) {
+                            availPos.push_back({posX, posY});
+                        }
+                        if (boardStatus[searchX][searchY] == Player::NoPlayer) {
+                            break;
+                        }
+                        searchX -= std::get<0>(*directionItr);
+                        searchY -= std::get<1>(*directionItr);
+                    }
+                }
+            }
+        }
+    }
+    this->_cachedAvailPosMap[player] = availPos;
+    return availPos;
+}
+
+const PlayerScoreMap Board::getPlayerScoreMap() {
+    return this->_playerScoreMapStack.top();
 }

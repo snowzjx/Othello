@@ -13,14 +13,14 @@
 
 USING_NS_CC;
 
-cocos2d::Scene* GameFinishLayer::createScene(PlayerScore playerScore) {
+cocos2d::Scene* GameFinishLayer::createScene(PlayerScoreMap playerScore) {
     auto scene = Scene::create();
     auto layer = GameFinishLayer::create(playerScore);
     scene->addChild(layer);
     return scene;
 }
 
-GameFinishLayer* GameFinishLayer::create(PlayerScore playerScore) {
+GameFinishLayer* GameFinishLayer::create(PlayerScoreMap playerScore) {
     auto layer = new GameFinishLayer();
     if (layer && layer->init(playerScore)) {
         layer->autorelease();
@@ -32,9 +32,9 @@ GameFinishLayer* GameFinishLayer::create(PlayerScore playerScore) {
     }
 }
 
-bool GameFinishLayer::init(PlayerScore playerScore) {
-    short blackScore = playerScore.blackPlayerScore;
-    short whiteScore = playerScore.whitePlayerScore;
+bool GameFinishLayer::init(PlayerScoreMap playerScore) {
+    short blackScore = playerScore[Player::BlackPlayer];
+    short whiteScore = playerScore[Player::WhitePlayer];
     Color3B foreGroundColor;
     Color4B backGroundColor;
     std::string infoString;
