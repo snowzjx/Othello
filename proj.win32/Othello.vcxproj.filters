@@ -10,6 +10,30 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\control">
+      <UniqueIdentifier>{67433726-771d-44a2-8bd0-88793111e133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\core">
+      <UniqueIdentifier>{8e08d854-7b4c-4c8b-879a-7a2577de7240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\engine">
+      <UniqueIdentifier>{8c2bd624-0168-4e1a-b13e-ae74a9ac4ad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game">
+      <UniqueIdentifier>{59c45864-4c21-462c-8911-a5ea86ea1e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\include">
+      <UniqueIdentifier>{5568d04d-66ea-4496-bdec-ce495682b7a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\scene">
+      <UniqueIdentifier>{d072137f-70b2-4f2d-9fb2-69810e840bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\sprite">
+      <UniqueIdentifier>{9e9e83ff-5a95-431b-8752-16ed1137a84c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\util">
+      <UniqueIdentifier>{00d18fd7-864a-4a6a-830b-da7eac2690e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,8 +42,35 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
+    <ClCompile Include="..\Classes\core\Board.cpp">
+      <Filter>Classes\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\engine\AIEngine.cpp">
+      <Filter>Classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\engine\Engine.cpp">
+      <Filter>Classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\engine\PlayerEngine.cpp">
+      <Filter>Classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\game\Othello.cpp">
+      <Filter>Classes\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\GameFinishScene.cpp">
+      <Filter>Classes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\MenuScene.cpp">
+      <Filter>Classes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\OthelloScene.cpp">
+      <Filter>Classes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene\PopupLayer.cpp">
+      <Filter>Classes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\sprite\PieceSprite.cpp">
+      <Filter>Classes\sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +80,77 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>Classes</Filter>
+    <ClInclude Include="..\Classes\control\ActionResponder.h">
+      <Filter>Classes\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\control\ActionResponderStatus.h">
+      <Filter>Classes\control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\Board.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\Matrix.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\MatrixData.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\Player.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\core\PlayerScore.h">
+      <Filter>Classes\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\engine\AIEngine.h">
+      <Filter>Classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\engine\Engine.h">
+      <Filter>Classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\engine\PlayerEngine.h">
+      <Filter>Classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\GameMode.h">
+      <Filter>Classes\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game\Othello.h">
+      <Filter>Classes\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\GraphicConfig.h">
+      <Filter>Classes\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\GameFinishScene.h">
+      <Filter>Classes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\MenuScene.h">
+      <Filter>Classes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\OthelloScene.h">
+      <Filter>Classes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene\PopupLayer.h">
+      <Filter>Classes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\sprite\PieceSprite.h">
+      <Filter>Classes\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\sprite\PieceSpriteStatus.h">
+      <Filter>Classes\sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\util\AnimationUtil.h">
+      <Filter>Classes\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\util\PlayerUtil.h">
+      <Filter>Classes\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\util\PointUtil.h">
+      <Filter>Classes\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\util\Singleton.h">
+      <Filter>Classes\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\util\StringPatch.h">
+      <Filter>Classes\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

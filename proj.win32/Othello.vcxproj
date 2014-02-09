@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -23,6 +23,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -30,6 +31,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -134,12 +136,44 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\core\Board.cpp" />
+    <ClCompile Include="..\Classes\engine\AIEngine.cpp" />
+    <ClCompile Include="..\Classes\engine\Engine.cpp" />
+    <ClCompile Include="..\Classes\engine\PlayerEngine.cpp" />
+    <ClCompile Include="..\Classes\game\Othello.cpp" />
+    <ClCompile Include="..\Classes\scene\GameFinishScene.cpp" />
+    <ClCompile Include="..\Classes\scene\MenuScene.cpp" />
+    <ClCompile Include="..\Classes\scene\OthelloScene.cpp" />
+    <ClCompile Include="..\Classes\scene\PopupLayer.cpp" />
+    <ClCompile Include="..\Classes\sprite\PieceSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\control\ActionResponder.h" />
+    <ClInclude Include="..\Classes\control\ActionResponderStatus.h" />
+    <ClInclude Include="..\Classes\core\Board.h" />
+    <ClInclude Include="..\Classes\core\Matrix.h" />
+    <ClInclude Include="..\Classes\core\MatrixData.h" />
+    <ClInclude Include="..\Classes\core\Player.h" />
+    <ClInclude Include="..\Classes\core\PlayerScore.h" />
+    <ClInclude Include="..\Classes\engine\AIEngine.h" />
+    <ClInclude Include="..\Classes\engine\Engine.h" />
+    <ClInclude Include="..\Classes\engine\PlayerEngine.h" />
+    <ClInclude Include="..\Classes\game\GameMode.h" />
+    <ClInclude Include="..\Classes\game\Othello.h" />
+    <ClInclude Include="..\Classes\include\GraphicConfig.h" />
+    <ClInclude Include="..\Classes\scene\GameFinishScene.h" />
+    <ClInclude Include="..\Classes\scene\MenuScene.h" />
+    <ClInclude Include="..\Classes\scene\OthelloScene.h" />
+    <ClInclude Include="..\Classes\scene\PopupLayer.h" />
+    <ClInclude Include="..\Classes\sprite\PieceSprite.h" />
+    <ClInclude Include="..\Classes\sprite\PieceSpriteStatus.h" />
+    <ClInclude Include="..\Classes\util\AnimationUtil.h" />
+    <ClInclude Include="..\Classes\util\PlayerUtil.h" />
+    <ClInclude Include="..\Classes\util\PointUtil.h" />
+    <ClInclude Include="..\Classes\util\Singleton.h" />
+    <ClInclude Include="..\Classes\util\StringPatch.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
