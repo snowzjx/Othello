@@ -1,0 +1,2 @@
+export NDK_ROOT=/Users/snow/Documents/Android/android-ndk-r9c
+export ANDROID_SDK_ROOT=/Users/snow/Documents/Android/adt-bundle-mac-x86_64-20131030/sdk
