@@ -17,7 +17,7 @@ Board::Board() {
     (*boardState)[BOARD_WIDTH / 2][BOARD_HEIGHT / 2 - 1] = Player::WhitePlayer;
     (*boardState)[BOARD_WIDTH / 2 - 1][BOARD_HEIGHT / 2] = Player::WhitePlayer;
     this->_boardStateStack.push(boardState);
-    this->_playerScoreMapStack.push(PlayerScoreMap(2, 2));
+    this->_playerScoreInfoStack.push(PlayerScoreInfo(2, 2));
 }
 
 Board::~Board() {
@@ -31,7 +31,7 @@ std::shared_ptr<Matrix<short>> Board::getBoardState() {
 bool Board::tackBackOneMove() {
     if (this->_boardStateStack.size() > 1) {
         this->_boardStateStack.pop();
-        this->_playerScoreMapStack.pop();
+        this->_playerScoreInfoStack.pop();
         this->_moveStack.pop();
         this->_cachedAvailPosMap.clear();
         return true;
@@ -69,7 +69,7 @@ bool Board::move(Move move) {
     }
     std::shared_ptr<Matrix<short>> boardState = this->_boardStateStack.top()->clone();
     std::vector<std::pair<unsigned short, unsigned short>> path;
-    PlayerScoreMap playerScore(this->getPlayerScoreMap());
+    PlayerScoreInfo playerScore(this->getPlayerScoreInfo());
     bool moveValid = false;
     for (auto itr = std::begin(searchDirections); itr != std::end(searchDirections); ++itr) {
         auto direction = *itr;
@@ -99,7 +99,7 @@ bool Board::move(Move move) {
         (*boardState)[x][y] = player;
         playerScore[player] ++;
 		this->_boardStateStack.push(boardState);
-        this->_playerScoreMapStack.push(playerScore);
+        this->_playerScoreInfoStack.push(playerScore);
         this->_moveStack.push(move);
         this->_cachedAvailPosMap.clear();
     }
@@ -151,6 +151,6 @@ std::vector<std::pair<unsigned short, unsigned short>> Board::getAvailPos(Player
     return availPos;
 }
 
-const PlayerScoreMap Board::getPlayerScoreMap() {
-    return this->_playerScoreMapStack.top();
+const PlayerScoreInfo Board::getPlayerScoreInfo() {
+    return this->_playerScoreInfoStack.top();
 }

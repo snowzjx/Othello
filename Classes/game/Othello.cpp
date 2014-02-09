@@ -33,10 +33,6 @@ const Player Othello::getCurrentPlayer() {
     return this->_currentPlayer;
 }
 
-PlayerScoreMap Othello::getPlayerScore() {
-    return this->_board->getPlayerScoreMap();
-}
-
 void Othello::setShouldShowMoveTip() {
     this->_showMoveTip = true;
 }

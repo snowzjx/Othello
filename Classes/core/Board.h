@@ -16,7 +16,7 @@
 #include "Matrix.h"
 #include "Player.h"
 #include "Move.h"
-#include "PlayerScoreMap.h"
+#include "PlayerScoreInfo.h"
 
 static const unsigned short BOARD_WIDTH = 8;
 static const unsigned short BOARD_HEIGHT = 8;
@@ -25,20 +25,40 @@ static const std::vector<std::pair<short, short>> DIRECTIONS = {{-1,0},{1,0},{0,
 class Board final {
 private:
     std::stack<std::shared_ptr<Matrix<short>>> _boardStateStack;
-    std::stack<PlayerScoreMap> _playerScoreMapStack;
+    std::stack<PlayerScoreInfo> _playerScoreInfoStack;
     std::stack<Move> _moveStack;
     std::map<Player, std::vector<std::pair<unsigned short, unsigned short>>> _cachedAvailPosMap;
 public:
+    
+    // Constructor.
     Board();
+    
+    // Destructor.
     ~Board();
+    
+    // Get the board status matrix.
     std::shared_ptr<Matrix<short>> getBoardState();
+    
+    // Move.
     bool move(Move move);
+    
+    // Move.
     bool move(Player player, unsigned short x, unsigned short y);
+    
+    // Get previous move.
     Move getPreviousMove();
+    
+    // Tack back one move.
     bool tackBackOneMove();
+    
+    // Get whether the board has move to be taken back.
     bool canTackBackOneMove();
+    
+    // Get the available positions.
     std::vector<std::pair<unsigned short, unsigned short>> getAvailPos(Player player);
-    const PlayerScoreMap getPlayerScoreMap();
+    
+    // Get the player score info.
+    const PlayerScoreInfo getPlayerScoreInfo();
 };
 
 #endif

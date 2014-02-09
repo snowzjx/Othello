@@ -6,19 +6,19 @@
 //
 //
 
-#include "PlayerScoreMap.h"
+#include "PlayerScoreInfo.h"
 
 #include <assert.h>
 
-PlayerScoreMap::PlayerScoreMap(const PlayerScoreMap &playerScore) {
+PlayerScoreInfo::PlayerScoreInfo(const PlayerScoreInfo &playerScore) {
     this->blackPlayerScore = playerScore.blackPlayerScore;
     this->whitePlayerScore = playerScore.whitePlayerScore;
 }
-PlayerScoreMap::PlayerScoreMap(unsigned short blackPlayerScore, unsigned short whitePlayerScore) {
+PlayerScoreInfo::PlayerScoreInfo(unsigned short blackPlayerScore, unsigned short whitePlayerScore) {
     this->blackPlayerScore = blackPlayerScore;
     this->whitePlayerScore = whitePlayerScore;
 }
-unsigned short PlayerScoreMap::getScore(Player player) {
+unsigned short PlayerScoreInfo::getScore(Player player) {
     assert(player != Player::NoPlayer);
     if (player == Player::BlackPlayer) {
         return blackPlayerScore;
@@ -26,7 +26,7 @@ unsigned short PlayerScoreMap::getScore(Player player) {
         return whitePlayerScore;
     }
 }
-unsigned short& PlayerScoreMap::operator[](Player player) {
+unsigned short& PlayerScoreInfo::operator[](Player player) {
     assert(player != Player::NoPlayer);
     if (player == Player::BlackPlayer) {
         return blackPlayerScore;

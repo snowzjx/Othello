@@ -32,17 +32,38 @@ private:
     void othelloThreadStart();
 
 public:
+    
+    // Constructor.
     Othello();
+    
+    // Desturctor.
     ~Othello();
+    
+    // Get whether the Othello is running or not.
     bool getIsGameRun();
+    
+    // Start Othello game, the game will run on a background thread.
     void startOthello();
+    
+    // Stop Othello game.
     void endOthello();
+    
+    // Set the player engine.
     void setEngine(Player player, std::shared_ptr<Engine> enginePtr);
+    
+    // Get the player engine.
     const std::shared_ptr<Engine> getEngine(Player player);
+    
+    // Get the current player.
     const Player getCurrentPlayer();
+    
+    // Get the Othello board.
     const std::shared_ptr<Board> getBoard();
-    PlayerScoreMap getPlayerScore();
+    
+    // Set whether should show the move tip.
     void setShouldShowMoveTip();
+    
+    // Get whether should show the move tip.
     bool getShouldShowMoveTip();
 };
 

@@ -6,18 +6,18 @@
 //
 //
 
-#ifndef _PLAYER_SCORE_MAP_H_
-#define _PLAYER_SCORE_MAP_H_
+#ifndef _PLAYER_SCORE_INFO_H_
+#define _PLAYER_SCORE_INFO_H_
 
 #include "Player.h"
 
-class PlayerScoreMap final {
+class PlayerScoreInfo final {
 private:
     unsigned short blackPlayerScore;
     unsigned short whitePlayerScore;
 public:
-    PlayerScoreMap(const PlayerScoreMap &playerScore);
-    PlayerScoreMap(unsigned short blackPlayerScore, unsigned short whitePlayerScore);
+    PlayerScoreInfo(const PlayerScoreInfo &playerScore);
+    PlayerScoreInfo(unsigned short blackPlayerScore, unsigned short whitePlayerScore);
     unsigned short getScore(Player player);
     unsigned short& operator[](Player player);
 };
