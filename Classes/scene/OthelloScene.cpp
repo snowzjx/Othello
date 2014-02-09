@@ -255,6 +255,10 @@ void OthelloLayer::pauseCallBack(cocos2d::Object *pSender) {
     titleLabel->setColor(FOREGROUND_COLOR);
     popupLayer->setTitle(titleLabel);
     
+    auto contextLabel = LabelTTF::create("The game is now paused.", "Helvetica.ttf", 10);
+    contextLabel->setColor(FOREGROUND_COLOR);
+    popupLayer->setContext(contextLabel);
+    
     auto resumeLabel = LabelTTF::create("Resume", "Helvetica.ttf", 10);
     resumeLabel->setColor(FOREGROUND_COLOR);
     auto resumeItem = MenuItemLabel::create(resumeLabel, CC_CALLBACK_1(OthelloLayer::pauseResumeCallBack, this));
