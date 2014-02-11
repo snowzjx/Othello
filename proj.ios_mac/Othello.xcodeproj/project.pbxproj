@@ -447,7 +447,6 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8085540A18A8C64E00FD8977 /* ai */,
 				80CE1740189D1949001CA2D6 /* include */,
 				808F6CCF1898E1C600877E51 /* sprite */,
 				803F8FE2188FAAF900C7B0F6 /* scene */,
@@ -629,13 +628,6 @@
 				8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */,
 			);
 			name = engine;
-			sourceTree = "<group>";
-		};
-		8085540A18A8C64E00FD8977 /* ai */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ai;
 			sourceTree = "<group>";
 		};
 		808F6CCF1898E1C600877E51 /* sprite */ = {

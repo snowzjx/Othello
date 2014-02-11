@@ -14,7 +14,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/core/Move.cpp \
                    ../../Classes/core/PlayerScoreInfo.cpp \
                    ../../Classes/engine/Engine.cpp \
-                   ../../Classes/engine/AIEngine.cpp \
+                   ../../Classes/engine/RandomAIEngine.cpp \
+                   ../../Classes/engine/AlphaBetaSearchAIEngine.cpp \
                    ../../Classes/engine/PlayerEngine.cpp \
                    ../../Classes/game/Othello.cpp \
                    ../../Classes/scene/MenuScene.cpp \
