@@ -72,13 +72,15 @@
 		803F8FEC188FABB000C7B0F6 /* OthelloScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F8FEA188FABB000C7B0F6 /* OthelloScene.cpp */; };
 		803F9003188FBCBB00C7B0F6 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F8FFF188FBCBB00C7B0F6 /* Engine.cpp */; };
 		803F9004188FBCBB00C7B0F6 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F8FFF188FBCBB00C7B0F6 /* Engine.cpp */; };
-		803F901A188FDCDE00C7B0F6 /* AIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F9017188FDCDE00C7B0F6 /* AIEngine.cpp */; };
-		803F901B188FDCDE00C7B0F6 /* AIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F9017188FDCDE00C7B0F6 /* AIEngine.cpp */; };
+		803F901A188FDCDE00C7B0F6 /* RandomAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F9017188FDCDE00C7B0F6 /* RandomAIEngine.cpp */; };
+		803F901B188FDCDE00C7B0F6 /* RandomAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F9017188FDCDE00C7B0F6 /* RandomAIEngine.cpp */; };
 		803F901E188FDDE100C7B0F6 /* PlayerEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F901D188FDDE100C7B0F6 /* PlayerEngine.cpp */; };
 		803F901F188FDDE100C7B0F6 /* PlayerEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 803F901D188FDDE100C7B0F6 /* PlayerEngine.cpp */; };
 		8053AA8A18A2254C00D2B651 /* fromWhiteToBlack.plist in Resources */ = {isa = PBXBuildFile; fileRef = 800CBD89189BA4D0001875CD /* fromWhiteToBlack.plist */; };
 		8053AA9318A2260D00D2B651 /* GameFinishScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8053AA9218A2260D00D2B651 /* GameFinishScene.cpp */; };
 		8053AA9418A2260D00D2B651 /* GameFinishScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8053AA9218A2260D00D2B651 /* GameFinishScene.cpp */; };
+		8085541B18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */; };
+		8085541C18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */; };
 		808F6CDA1898FA8300877E51 /* PieceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 808F6CD81898FA8300877E51 /* PieceSprite.cpp */; };
 		80AF5B57189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */; };
 		80AF5B58189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */; };
@@ -332,14 +334,16 @@
 		803F8FEA188FABB000C7B0F6 /* OthelloScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OthelloScene.cpp; path = ../Classes/scene/OthelloScene.cpp; sourceTree = "<group>"; };
 		803F8FFF188FBCBB00C7B0F6 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = ../Classes/engine/Engine.cpp; sourceTree = "<group>"; };
 		803F9000188FBCBB00C7B0F6 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Engine.h; path = ../Classes/engine/Engine.h; sourceTree = "<group>"; };
-		803F9017188FDCDE00C7B0F6 /* AIEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AIEngine.cpp; path = ../Classes/engine/AIEngine.cpp; sourceTree = "<group>"; };
-		803F9018188FDCDE00C7B0F6 /* AIEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIEngine.h; path = ../Classes/engine/AIEngine.h; sourceTree = "<group>"; };
+		803F9017188FDCDE00C7B0F6 /* RandomAIEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RandomAIEngine.cpp; path = ../Classes/engine/RandomAIEngine.cpp; sourceTree = "<group>"; };
+		803F9018188FDCDE00C7B0F6 /* RandomAIEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RandomAIEngine.h; path = ../Classes/engine/RandomAIEngine.h; sourceTree = "<group>"; };
 		803F901C188FDCED00C7B0F6 /* PlayerEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlayerEngine.h; path = ../Classes/engine/PlayerEngine.h; sourceTree = "<group>"; };
 		803F901D188FDDE100C7B0F6 /* PlayerEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerEngine.cpp; path = ../Classes/engine/PlayerEngine.cpp; sourceTree = "<group>"; };
 		803F9021188FFB1800C7B0F6 /* PlayerUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerUtil.h; sourceTree = "<group>"; };
 		8053AA9118A225A200D2B651 /* GameFinishScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GameFinishScene.h; path = ../Classes/scene/GameFinishScene.h; sourceTree = "<group>"; };
 		8053AA9218A2260D00D2B651 /* GameFinishScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameFinishScene.cpp; path = ../Classes/scene/GameFinishScene.cpp; sourceTree = "<group>"; };
 		8057F5C518A6625300517308 /* StringPatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringPatch.h; sourceTree = "<group>"; };
+		8085541918A8CE6800FD8977 /* AlphaBetaSearchAIEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AlphaBetaSearchAIEngine.h; path = ../Classes/engine/AlphaBetaSearchAIEngine.h; sourceTree = "<group>"; };
+		8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlphaBetaSearchAIEngine.cpp; path = ../Classes/engine/AlphaBetaSearchAIEngine.cpp; sourceTree = "<group>"; };
 		808F6CD81898FA8300877E51 /* PieceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PieceSprite.cpp; path = ../Classes/sprite/PieceSprite.cpp; sourceTree = "<group>"; };
 		808F6CDB1898FACC00877E51 /* PieceSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSprite.h; path = ../Classes/sprite/PieceSprite.h; sourceTree = "<group>"; };
 		808F6CDC1898FACC00877E51 /* PieceSpriteStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSpriteStatus.h; path = ../Classes/sprite/PieceSpriteStatus.h; sourceTree = "<group>"; };
@@ -443,6 +447,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8085540A18A8C64E00FD8977 /* ai */,
 				80CE1740189D1949001CA2D6 /* include */,
 				808F6CCF1898E1C600877E51 /* sprite */,
 				803F8FE2188FAAF900C7B0F6 /* scene */,
@@ -616,12 +621,21 @@
 			children = (
 				803F9000188FBCBB00C7B0F6 /* Engine.h */,
 				803F8FFF188FBCBB00C7B0F6 /* Engine.cpp */,
-				803F9018188FDCDE00C7B0F6 /* AIEngine.h */,
-				803F9017188FDCDE00C7B0F6 /* AIEngine.cpp */,
 				803F901C188FDCED00C7B0F6 /* PlayerEngine.h */,
 				803F901D188FDDE100C7B0F6 /* PlayerEngine.cpp */,
+				803F9018188FDCDE00C7B0F6 /* RandomAIEngine.h */,
+				803F9017188FDCDE00C7B0F6 /* RandomAIEngine.cpp */,
+				8085541918A8CE6800FD8977 /* AlphaBetaSearchAIEngine.h */,
+				8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */,
 			);
 			name = engine;
+			sourceTree = "<group>";
+		};
+		8085540A18A8C64E00FD8977 /* ai */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ai;
 			sourceTree = "<group>";
 		};
 		808F6CCF1898E1C600877E51 /* sprite */ = {
@@ -968,6 +982,7 @@
 				8009DDA418A7A36600A3DD5E /* Move.cpp in Sources */,
 				803F9003188FBCBB00C7B0F6 /* Engine.cpp in Sources */,
 				80AF5B57189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */,
+				8085541B18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */,
 				80C29331188BF225008E7989 /* Board.cpp in Sources */,
 				8053AA9318A2260D00D2B651 /* GameFinishScene.cpp in Sources */,
 				803F8FEB188FABB000C7B0F6 /* OthelloScene.cpp in Sources */,
@@ -977,7 +992,7 @@
 				808F6CDA1898FA8300877E51 /* PieceSprite.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				803F901E188FDDE100C7B0F6 /* PlayerEngine.cpp in Sources */,
-				803F901A188FDCDE00C7B0F6 /* AIEngine.cpp in Sources */,
+				803F901A188FDCDE00C7B0F6 /* RandomAIEngine.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				80C29346188BF4B4008E7989 /* Othello.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -994,6 +1009,7 @@
 				80C29347188BF4B4008E7989 /* Othello.cpp in Sources */,
 				803F901F188FDDE100C7B0F6 /* PlayerEngine.cpp in Sources */,
 				8053AA9418A2260D00D2B651 /* GameFinishScene.cpp in Sources */,
+				8085541C18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */,
 				80209912189913EB00AE9C54 /* PieceSprite.cpp in Sources */,
 				8009DDA118A798F600A3DD5E /* PlayerScoreInfo.cpp in Sources */,
 				8009DDA518A7A36600A3DD5E /* Move.cpp in Sources */,
@@ -1001,7 +1017,7 @@
 				80CE173F189CE9A9001CA2D6 /* PopupLayer.cpp in Sources */,
 				803F9004188FBCBB00C7B0F6 /* Engine.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				803F901B188FDCDE00C7B0F6 /* AIEngine.cpp in Sources */,
+				803F901B188FDCDE00C7B0F6 /* RandomAIEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

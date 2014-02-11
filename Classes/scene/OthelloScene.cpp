@@ -9,7 +9,8 @@
 #include "OthelloScene.h"
 #include "../AppDelegate.h"
 #include "../engine/PlayerEngine.h"
-#include "../engine/AIEngine.h"
+#include "../engine/RandomAIEngine.h"
+#include "../engine/AlphaBetaSearchAIEngine.h"
 #include "../include/GraphicConfig.h"
 #include "../util/PointUtil.h"
 #include "../util/AnimationUtil.h"
@@ -108,15 +109,15 @@ void OthelloLayer::setGameMode(GameMode gameMode) {
             break;
         case GameMode::humanVsAi:
             bEngine = this->createPlayerEngine();
-            wEngine = std::shared_ptr<Engine>(new AIEngine);
+            wEngine = this->createLocalAIEngine();
             break;
         case GameMode::aiVsHuman:
-            bEngine = std::shared_ptr<Engine>(new AIEngine);
+            bEngine = this->createLocalAIEngine();
             wEngine = this->createPlayerEngine();
             break;
         case GameMode::aiVsAi:
-            bEngine = std::shared_ptr<Engine>(new AIEngine);
-            wEngine = std::shared_ptr<Engine>(new AIEngine);
+            bEngine = this->createLocalAIEngine();
+            wEngine = this->createLocalAIEngine();
             break;
         default:
             break;
@@ -129,6 +130,11 @@ std::shared_ptr<Engine> OthelloLayer::createPlayerEngine() {
     std::shared_ptr<PlayerEngine> playerEngine = std::shared_ptr<PlayerEngine>(new PlayerEngine);
     this->_actionResponderSet.insert(playerEngine);
     return playerEngine;
+}
+
+std::shared_ptr<Engine> OthelloLayer::createLocalAIEngine() {
+    std::shared_ptr<AlphaBetaSearchAIEngine> localAIEngine = std::shared_ptr<AlphaBetaSearchAIEngine>(new AlphaBetaSearchAIEngine);
+    return localAIEngine;
 }
 
 void OthelloLayer::onEnter() {

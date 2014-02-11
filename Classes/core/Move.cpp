@@ -8,6 +8,10 @@
 
 #include "Move.h"
 
+Move::Move() {
+    
+}
+
 Move::Move(Player player, unsigned short x, unsigned short y) {
     this->player = player;
     this->x = x;

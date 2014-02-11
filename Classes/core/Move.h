@@ -16,6 +16,7 @@ public:
     Player player;
     unsigned short x;
     unsigned short y;
+    Move();
     Move(Player player, unsigned short x, unsigned short y);
 };
 

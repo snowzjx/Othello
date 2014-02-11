@@ -16,7 +16,7 @@
 #include <condition_variable>
 #include "../control/ActionResponder.h"
 
-class PlayerEngine: public Engine, public ActionResponder {
+class PlayerEngine final: public Engine, public ActionResponder {
 private:
     std::atomic_bool _isActionValueSet;
     std::mutex _mtx;

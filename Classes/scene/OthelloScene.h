@@ -35,6 +35,7 @@ public:
 
 private:
     std::shared_ptr<Engine> createPlayerEngine();
+    std::shared_ptr<Engine> createLocalAIEngine();
     virtual void onEnter() override;
 	virtual void onExit() override;
     virtual void update(float delta) override;

@@ -6,22 +6,22 @@
 //
 //
 
-#include "AIEngine.h"
+#include "RandomAIEngine.h"
 
 #include <cstdlib>
 #include <time.h>
 #include "../game/Othello.h"
 #include "../util/Singleton.h"
 
-AIEngine::AIEngine() {
+RandomAIEngine::RandomAIEngine() {
     
 }
 
-AIEngine::~AIEngine() {
+RandomAIEngine::~RandomAIEngine() {
 
 }
 
-std::function<bool()> AIEngine::getNextAction() {
+std::function<bool()> RandomAIEngine::getNextAction() {
     return [&]() -> bool {
         auto availPos = Singleton<Othello>::getInstance()->getBoard()->getAvailPos(this->_player);
         int size = availPos.size();
@@ -33,14 +33,14 @@ std::function<bool()> AIEngine::getNextAction() {
     };
 }
 
-bool AIEngine::getComfirmUndoValue() {
+bool RandomAIEngine::getComfirmUndoValue() {
     return true;
 }
 
-void AIEngine::start() {
+void RandomAIEngine::start() {
 	srand(time(0));
 }
 
-void AIEngine::stop() {
+void RandomAIEngine::stop() {
 	return;
 }

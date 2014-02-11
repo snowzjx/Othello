@@ -6,15 +6,15 @@
 //
 //
 
-#ifndef _AI_EIGINE_H_
-#define _AI_EIGINE_H_
+#ifndef _RANDOM_AI_EIGINE_H_
+#define _RANDOM_AI_EIGINE_H_
 
 #include "Engine.h"
 
-class AIEngine: public Engine {
+class RandomAIEngine final: public Engine {
 public:
-    AIEngine();
-    ~AIEngine();
+    RandomAIEngine();
+    ~RandomAIEngine();
     virtual std::function<bool()> getNextAction() override;
     virtual bool getComfirmUndoValue() override;
 	virtual void start() override;
