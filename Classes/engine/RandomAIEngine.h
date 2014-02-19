@@ -11,6 +11,8 @@
 
 #include "Engine.h"
 
+#include <random>
+
 class RandomAIEngine final: public Engine {
 public:
     RandomAIEngine();
@@ -19,6 +21,9 @@ public:
     virtual bool getComfirmUndoValue() override;
 	virtual void start() override;
 	virtual void stop() override;
+
+private:
+	std::default_random_engine _generator;
 };
 
 #endif
