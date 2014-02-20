@@ -41,7 +41,7 @@ bool Board::tackBackOneMove() {
 }
 
 bool Board::canTackBackOneMove() {
-    return this->_moveStack.size() > 0;
+    return this->_moveStack.size() >= 2;
 }
 
 bool Board::move(Player player, unsigned short x, unsigned short y) {
