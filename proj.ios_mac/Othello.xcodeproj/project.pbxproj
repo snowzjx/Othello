@@ -82,6 +82,8 @@
 		8085541B18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */; };
 		8085541C18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */; };
 		808F6CDA1898FA8300877E51 /* PieceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 808F6CD81898FA8300877E51 /* PieceSprite.cpp */; };
+		80A4E67D18B257B0002A90C0 /* TranspositionTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E67C18B257B0002A90C0 /* TranspositionTable.cpp */; };
+		80A4E67E18B257B0002A90C0 /* TranspositionTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E67C18B257B0002A90C0 /* TranspositionTable.cpp */; };
 		80AF5B57189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */; };
 		80AF5B58189F8ADD00BE9CA2 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */; };
 		80C29331188BF225008E7989 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80C2932C188BF225008E7989 /* Board.cpp */; };
@@ -347,6 +349,8 @@
 		808F6CD81898FA8300877E51 /* PieceSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PieceSprite.cpp; path = ../Classes/sprite/PieceSprite.cpp; sourceTree = "<group>"; };
 		808F6CDB1898FACC00877E51 /* PieceSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSprite.h; path = ../Classes/sprite/PieceSprite.h; sourceTree = "<group>"; };
 		808F6CDC1898FACC00877E51 /* PieceSpriteStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PieceSpriteStatus.h; path = ../Classes/sprite/PieceSpriteStatus.h; sourceTree = "<group>"; };
+		80A4E67518B2572C002A90C0 /* TranspositionTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TranspositionTable.h; path = ../Classes/engine/TranspositionTable.h; sourceTree = "<group>"; };
+		80A4E67C18B257B0002A90C0 /* TranspositionTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TranspositionTable.cpp; path = ../Classes/engine/TranspositionTable.cpp; sourceTree = "<group>"; };
 		80A5CCFC18A4F2A30056AAD4 /* PlayerScoreInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerScoreInfo.h; sourceTree = "<group>"; };
 		80AF5B4F189F8A6200BE9CA2 /* MenuScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/scene/MenuScene.h; sourceTree = "<group>"; };
 		80AF5B56189F8ADD00BE9CA2 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/scene/MenuScene.cpp; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 				803F9017188FDCDE00C7B0F6 /* RandomAIEngine.cpp */,
 				8085541918A8CE6800FD8977 /* AlphaBetaSearchAIEngine.h */,
 				8085541A18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp */,
+				80A4E67518B2572C002A90C0 /* TranspositionTable.h */,
+				80A4E67C18B257B0002A90C0 /* TranspositionTable.cpp */,
 			);
 			name = engine;
 			sourceTree = "<group>";
@@ -977,6 +983,7 @@
 				8085541B18A8CEE700FD8977 /* AlphaBetaSearchAIEngine.cpp in Sources */,
 				80C29331188BF225008E7989 /* Board.cpp in Sources */,
 				8053AA9318A2260D00D2B651 /* GameFinishScene.cpp in Sources */,
+				80A4E67D18B257B0002A90C0 /* TranspositionTable.cpp in Sources */,
 				803F8FEB188FABB000C7B0F6 /* OthelloScene.cpp in Sources */,
 				8009DDA018A798F600A3DD5E /* PlayerScoreInfo.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -1007,6 +1014,7 @@
 				8009DDA518A7A36600A3DD5E /* Move.cpp in Sources */,
 				803F8FEC188FABB000C7B0F6 /* OthelloScene.cpp in Sources */,
 				80CE173F189CE9A9001CA2D6 /* PopupLayer.cpp in Sources */,
+				80A4E67E18B257B0002A90C0 /* TranspositionTable.cpp in Sources */,
 				803F9004188FBCBB00C7B0F6 /* Engine.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				803F901B188FDCDE00C7B0F6 /* RandomAIEngine.cpp in Sources */,

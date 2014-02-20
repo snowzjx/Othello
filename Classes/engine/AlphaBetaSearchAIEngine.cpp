@@ -19,12 +19,12 @@ const static std::set<std::pair<unsigned short, unsigned short>> CORNERS = {{0, 
 const static int k_MOVES_WEIGHT = 5;
 const static int k_FRONTIERS_SQUARES_WEIGHT = 1;
 const static int k_CORNER_WEIGHT = 200;
-const static int k_STABLE_PIECE_WEIGHT = 20;
+const static int k_STABLE_PIECE_WEIGHT = 10;
 const static int k_X_SQUARE_WEIGHT = 200;
 const static int k_C_SQUARE_WEIGHT = 150;
 const static int SEARCH_MAX_DEPTH = 4;
-const static int POSITIVE_INFINITY = 65535;
-const static int NEGATIVE_INFINITY = -65535;
+const static int POSITIVE_INFINITY = 1000000;
+const static int NEGATIVE_INFINITY = -1000000;
 
 AlphaBetaSearchAIEngine::AlphaBetaSearchAIEngine() {
     
